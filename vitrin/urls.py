@@ -6,6 +6,6 @@ from . import views
 app_name = 'vitrin'
 
 urlpatterns = [
-    path('find-product/', views.find_product, name='find-product'),
+    path('show-tickets/', views.show_tickets, name='show-tickets'),
     path('', views.index, name='index'),
 ]

@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse
+from ticket.models import Ticket
 
 
 def index(request):
@@ -7,6 +8,6 @@ def index(request):
     # return render(request, 'vitrin/index.html')
 
 
-def find_product(request):
-    """Find the product that user wants to buy"""
-    return HttpResponse('<div style="text-align: center;"><h1>This will be served for finding the product...</h1></div>')
+def show_tickets(request):
+    """Show all active tickets to the user"""
+    return render(request, '')
