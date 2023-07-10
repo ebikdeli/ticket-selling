@@ -4,6 +4,7 @@ from ticket.models import Ticket
 
 def index(request):
     """Index page of the shop"""
+    print(request.session.session_key)
     return HttpResponse('<div style="text-align: center;"><h1>Welcome to trenydol</h1></div>')
     # return render(request, 'vitrin/index.html')
 

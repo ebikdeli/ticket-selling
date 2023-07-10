@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'account',
     'login',
     'vitrin',
-    # 'cart',
+    'cart',
     # 'order',
     # 'payment',
     'ticket',
@@ -64,7 +64,7 @@ MIDDLEWARE = [
     
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'cart.custom_middleware.InitialSessionMiddleware',      # Customized middleware to check sessions
+    'cart.custom_middleware.InitialSessionMiddleware',      # Customized middleware to check sessions
 ]
 
 
@@ -85,7 +85,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                # 'cart.context_processor.get_cart',
+                'cart.context_processor.get_cart',
             ],
         },
     },

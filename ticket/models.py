@@ -47,8 +47,14 @@ class TicketSold(models.Model):
                                related_name='ticketsold_ticket',
                                on_delete=models.CASCADE
                                )
+    cart = models.ForeignKey('cart.Cart',
+                             verbose_name=_('cart'),
+                             related_name='ticketsold_cart',
+                             on_delete=models.CASCADE)
     ticket_code = models.CharField(verbose_name=_('ticket_code'), max_length=10, blank=True)
     quantity = models.PositiveIntegerField(verbose_name=_('quantity'), default=1)
+    is_paid = models.BooleanField(verbose_name=_('is_paid'), default=True)
+    is_active = models.BooleanField(verbose_name=_('is_active'), default=True)
     slug = models.SlugField(blank=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('created'))
     updated = models.DateTimeField(auto_now=True, verbose_name=_('updated'))
