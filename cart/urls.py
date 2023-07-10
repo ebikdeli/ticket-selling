@@ -7,8 +7,9 @@ app_name = 'cart'
 
 urlpatterns = [
     # ? To use in API calls
-    path('add-product-cart', views.add_product_cart, name='add-product-cart'),
-    path('change-product-cart', views.change_product_cart, name='change-product-cart'),
-    path('delete-item-cart', views.delete_item_cart, name='delete-item-cart'),
+    path('add-ticket-cart', views.add_ticket_cart, name='add-ticket-cart'),
+    path('change-ticket-cart', views.change_ticket_cart, name='change-ticket-cart'),
+    path('delete-ticket-cart', views.delete_ticket_cart, name='delete-ticket-cart'),
+    path('clean-cart', views.clean_cart, name='clean-cart'),
     path('', views.cart_view, name='cart_view'),
 ]

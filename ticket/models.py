@@ -41,7 +41,9 @@ class TicketSold(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              verbose_name=_('user'),
                              related_name='ticketsold_user',
-                             on_delete=models.CASCADE)
+                             on_delete=models.SET_NULL,
+                             blank=True,
+                             null=True)
     ticket = models.ForeignKey('Ticket',
                                verbose_name=_('ticket'),
                                related_name='ticketsold_ticket',
@@ -70,7 +72,10 @@ class TicketSold(models.Model):
     def save(self, *args, **kwargs) -> None:
         if not self.ticket_code:
             self.ticket_code = get_random_string(10)
-        self.slug = slugify(f'{self.user.username}_{self.ticket_code}')
+        if self.user:
+            self.slug = slugify(f'{self.user.username}_{self.ticket.name}')
+        else:
+            self.slug = slugify(f'{self.ticket.name}')
         return super().save(*args, **kwargs)
     
     @property
