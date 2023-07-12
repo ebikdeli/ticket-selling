@@ -10,7 +10,13 @@ import json
 
 
 def cart_view(request):
-    return render(request, 'cart/templates/cart/cart_view.html')
+    """View current active cart for the user"""
+    # For authenticated users, if cart is empty, delete all active order (if any exist)
+    if request.user.is_authenticated:
+        cart = request.user.cart_user.first()
+        if not cart.total_quantity:
+            cart.order_cart.filter(is_active=True).delete()
+    return render(request, 'templates/cart/cart_view.html')
 
 
 def add_ticket_cart(request):

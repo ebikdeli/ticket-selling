@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'login',
     'vitrin',
     'cart',
-    # 'order',
-    # 'payment',
+    'order',
+    'payment',
     'ticket',
 ]
 

@@ -14,9 +14,9 @@ urlpatterns = [
     # path('token-auth/', token_view.obtain_auth_token),    # But in this example 'accounts.tests' module only works with
 
     path('login/', include('login.urls')),
-    # path('cart/', include('cart.urls')),
-    # path('order/', include('order.urls')),
-    # path('payment/', include('payment.urls')),
+    path('cart/', include('cart.urls')),
+    path('order/', include('order.urls')),
+    path('payment/', include('payment.urls')),
     path('ticket/', include('ticket.urls')),
     path('', include('vitrin.urls')),
 ]

@@ -19,6 +19,7 @@ class Ticket(models.Model):
     number_sold = models.PositiveIntegerField(verbose_name=_('number_sold'), default=0)
     is_acive = models.BooleanField(verbose_name=_('is_active'), default=True)
     image = models.ImageField(verbose_name=_('image'), upload_to=ticket_image_path, blank=True, null=True)
+    lottery_date = models.DateTimeField(verbose_name=_('lottery date'))
     content = models.TextField(verbose_name=_('content'), blank=True)
     slug = models.SlugField(blank=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('created'))

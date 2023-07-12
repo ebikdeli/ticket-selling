@@ -4,7 +4,6 @@ from django.http.request import HttpRequest
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.utils.text import slugify
-from .models import Cart
 from .cart_functions import reset_session, set_session_cart, get_cart_with_id,\
                             get_cart_and_cart_item_id
 from ticket.models import Ticket, TicketSold

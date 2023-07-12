@@ -33,7 +33,7 @@ class Payment(models.Model):
     
     class Meta:
         verbose_name = 'Payment'
-        verbose_name_plural = 'Payments'
+        verbose_name_plural = 'Payment'
     
     def __str__(self) -> str:
         return f'{self.payment_id}'
@@ -43,13 +43,6 @@ class Payment(models.Model):
         """Get the cart for this payment"""
         if self.order:
             return self.order.cart
-        return None
-
-    @property
-    def order_items(self) -> object|None:
-        """Get order items of the payment"""
-        if self.order:
-            return self.order.order_item_order.all()
         return None
     
     @property

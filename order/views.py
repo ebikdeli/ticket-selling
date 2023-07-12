@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-
 from .models import Order
 from .forms import OrderForm
 
@@ -52,20 +51,20 @@ def order_form(request):
 
 
 @login_required
-def checkout(request, order_id=None):
-    """Checkout page for the user order"""
-    # 'order_found=-1' means there is no such an order. 'order_found=0' means order is registered but no item in it. 'order_found=1' means order is registered with item in it
-    order_found = 0
-    order = Order.objects.filter(order_id=order_id).get() if Order.objects.filter(order_id=order_id) else None
-    if not order:
-        print('THIS ORDER IS NOT REGISTERED')
-        order_found = -1
-    elif order.quantity_total < 1:
-        print('THIS ORDER HAS NO ITEM IN IT')
-        order_found = 0
+def checkout(request):
+    """Order checkout for current Cart"""
+    cart = request.user.cart_user.first()
+    # If cart is empty, delete all active order (if any exist)
+    if not cart.total_quantity:
+        cart.order_cart.filter(is_active=True).delete()
+        return redirect('cart:cart-view')
+    if not cart.order_cart.exists():
+        print('NEW ORDER CREATED')
+        order = cart.order_cart.create(user=request.user)
     else:
-        order_found = 1
-    context = {'order': order, 'order_found': order_found}
+        print('ORDER ALREADY EXISTS')
+        order = cart.order_cart.filter(is_active=True).first()
+    context = {'order': order}
     return render(request, 'order/checkout.html', context=context)
 
 
@@ -73,15 +72,10 @@ def checkout(request, order_id=None):
 def order_detail(request, order_id=None):
     """View details of the order"""
     # 'order_found=-1' means there is no such an order. 'order_found=0' means order is registered but no item in it. 'order_found=1' means order is registered with item in it
-    order_found = 0
-    order = Order.objects.filter(order_id=order_id).get() if Order.objects.filter(order_id=order_id) else None
+    order = Order.objects.filter(order_id=order_id).get() if Order.objects.filter(order_id=order_id).exists() else None
     if not order:
         print('THIS ORDER IS NOT REGISTERED')
-        order_found = -1
-    elif order.quantity_total < 1:
-        print('THIS ORDER HAS NO ITEM IN IT')
-        order_found = 0
     else:
-        order_found = 1
-    context = {'order': order, 'order_found': order_found}
+        print('THIS ORDER HAS BEEN REGISTERED')
+    context = {'order': order}
     return render(request, 'order/order-detail.html', context=context)
