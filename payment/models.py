@@ -12,7 +12,7 @@ class Payment(models.Model):
         ('zarrin', 'zarrin'),
         ('idpay', 'idpay'),
     ]
-    payment_id = models.CharField(verbose_name=_('payment_id'), max_length=40, default=uuid.uuid4, editable=True, unique=True)
+    payment_id = models.UUIDField(verbose_name=_('payment_id'), max_length=40, default=uuid.uuid4, editable=True, unique=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                             verbose_name=_('user'),
                             related_name='payment_user',
@@ -46,11 +46,15 @@ class Payment(models.Model):
         return None
     
     @property
-    def products(self) -> list:
-        """Get products of the payment order"""
-        products = list()
-        products.extra
+    def tickets(self) -> QuerySet|None:
+        """Get tickets of the payment order"""
         if self.order:
-            for oi in self.order.order_item_order.all():
-                products.append(oi.product)
-        return products
+            return self.order.tickets
+        return None
+    
+    @property
+    def ticketsolds(self) -> QuerySet|None:
+        """Get ticketsolds of the payment order"""
+        if self.order:
+            return self.order.ticketsolds
+        return None
