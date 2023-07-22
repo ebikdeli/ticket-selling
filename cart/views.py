@@ -29,6 +29,7 @@ def add_ticket_cart(request):
         data = json.loads(json_data)
         ticket_id = data.get('ticket-id', None)
         quantity = data.get('quantity', None)
+        cart_id = data.get('cart-id', None)
         if not ticket_id or not quantity:
             return JsonResponse(data={'msg': 'دیتای ارسالی فاقد اعتبار است', 'code': 402, 'status': 'nok'})
         ticket_qs = Ticket.objects.filter(id=ticket_id)
@@ -36,13 +37,14 @@ def add_ticket_cart(request):
             return JsonResponse(data={'msg': 'بلیطی با مشخصه ارسالی دریافت نشد', 'code': 402, 'status': 'nok'})
         # * Put ticket into the cart
         # Get current Cart
-        if request.user.is_authenticated:
-            cart_id = request.user.cart_user.first().id
-        else:
-            try:
-                cart_id = request.session['cart_id']
-            except KeyError:
-                return JsonResponse({'msg': 'سرور در حال حاضر مشکل دارد', 'code': 402, 'status': 'nok'})
+        if not cart_id:
+            if request.user.is_authenticated:
+                cart_id = request.user.cart_user.first().id
+            else:
+                try:
+                    cart_id = request.session['cart_id']
+                except KeyError:
+                    return JsonResponse({'msg': 'سرور در حال حاضر مشکل دارد', 'code': 402, 'status': 'nok'})
         cart_qs = Cart.objects.filter(id=cart_id)
         if not cart_qs.exists():
             return JsonResponse(data={'msg': 'ارتباط با سبد خرید برقرار نشد', 'code': 402, 'status': 'nok'})
@@ -66,26 +68,38 @@ def change_ticket_cart(request):
         if not json_data:
             return JsonResponse(data={'msg': 'دیتایی دریافت نشد', 'code': 402, 'status': 'nok'})
         data = json.loads(json_data)
-        ticketsold_id = data.get('ticketsold-id', None)
+        # get product to be changed on quantity
+        # ticketsold_id = data.get('ticketsold-id', None)
+        ticket_id = data.get('ticket-id', None)
         quantity = data.get('quantity', None)
-        if not ticketsold_id or not quantity:
+        cart_id = data.get('cart-id', None)
+        # if not ticketsold_id or not quantity:
+        if not ticket_id or not quantity:
             return JsonResponse(data={'msg': 'دیتای ارسالی فاقد اعتبار است', 'code': 402, 'status': 'nok'})
-        ticketsold_qs = TicketSold.objects.filter(id=ticketsold_id)
-        if not ticketsold_qs.exists():
+        # ticketsold_qs = TicketSold.objects.filter(id=ticketsold_id)
+        ticket_qs = Ticket.objects.filter(id=ticket_id)
+        # if not ticketsold_qs.exists():
+        if not ticket_qs.exists():
             return JsonResponse(data={'msg': 'بلیطی با مشخصه ارسالی خریداری نشده', 'code': 402, 'status': 'nok'})
         # * update ticket into the cart
         # Get current Cart
-        if request.user.is_authenticated:
-            cart_id = request.user.cart_user.first().id
-        else:
-            try:
-                cart_id = request.session['cart_id']
-            except KeyError:
-                return JsonResponse({'msg': 'سرور در حال حاضر مشکل دارد', 'code': 402, 'status': 'nok'})
+        if not cart_id:
+            if request.user.is_authenticated:
+                cart_id = request.user.cart_user.first().id
+            else:
+                try:
+                    cart_id = request.session['cart_id']
+                except KeyError:
+                    return JsonResponse({'msg': 'سرور در حال حاضر مشکل دارد', 'code': 402, 'status': 'nok'})
         cart_qs = Cart.objects.filter(id=cart_id)
         if not cart_qs.exists():
             return JsonResponse(data={'msg': 'ارتباط با سبد خرید برقرار نشد', 'code': 402, 'status': 'nok'})
         cart = cart_qs.get()
+        # ticketsold = ticketsold_qs.get()
+        ticket = ticket_qs.get()
+        ticketsold_qs = TicketSold.objects.filter(ticket=ticket, cart=cart)
+        if not ticketsold_qs.exists():
+            return JsonResponse({'msg': 'سرور در پردازش سبد خرید و بلیط خریداری شده مشکل دارد', 'code': 402, 'status': 'nok'})
         ticketsold = ticketsold_qs.get()
         # *** Following method append ticket to the user cart
         result = cart.change_ticket_quantity(request, quantity, ticketsold)
@@ -105,16 +119,32 @@ def delete_ticket_cart(request):
         if not json_data:
             return JsonResponse(data={'msg': 'هیچ دیتایی دریافت نشد', 'code': 402, 'status': 'nok'})
         data = json.loads(json_data)
-        ticketsold_id = data.get('ticket-id', None)
+        ticket_id = data.get('ticket-id', None)
         cart_id = data.get('cart-id', None)
-        if not ticketsold_id or not cart_id:
+        # if not ticketsold_id or not quantity:
+        if not ticket_id:
             return JsonResponse(data={'msg': 'دیتای دریافتی فاقد اعتبار است', 'code': 402, 'status': 'nok'})
         # get product to be deleted
-        ticketsold_qs = TicketSold.objects.filter(id=ticketsold_id)
-        if not ticketsold_qs.exists():
+        # ticketsold_qs = TicketSold.objects.filter(id=ticketsold_id)
+        ticket_qs = Ticket.objects.filter(id=ticket_id)
+        # if not ticketsold_qs.exists():
+        if not ticket_qs.exists():
             return JsonResponse(data={'msg': 'کد بلیط انتخاب شده اشتباه است', 'code': 402, 'status': 'nok'})
+        # ticketsold = ticketsold_qs.get()
+        ticket = ticket_qs.get()
+        ticketsold_qs = TicketSold.objects.filter(ticket=ticket, cart=cart)
+        if not ticketsold_qs.exists():
+            return JsonResponse({'msg': 'سرور در پردازش سبد خرید و بلیط خریداری شده مشکل دارد', 'code': 402, 'status': 'nok'})
         ticketsold = ticketsold_qs.get()
         # get the cart that ticket should get deleted from
+        if not cart_id:
+            if request.user.is_authenticated:
+                cart_id = request.user.cart_user.first().id
+            else:
+                try:
+                    cart_id = request.session['cart_id']
+                except KeyError:
+                    return JsonResponse({'msg': 'سرور در حال حاضر مشکل دارد', 'code': 402, 'status': 'nok'})
         cart_qs = Cart.objects.filter(id=cart_id)
         if not cart_qs.exists():
             return JsonResponse(data={'msg': 'سبد خرید انتخاب شده فاقد اعتبار است', 'code': 402, 'status': 'nok'})
@@ -140,7 +170,13 @@ def clean_cart(request):
         data = json.loads(json_data)
         cart_id = data.get('cart-id', None)
         if not cart_id:
-            return JsonResponse(data={'msg': 'دیتای دریافتی فاقد اعتبار است', 'code': 402, 'status': 'nok'})
+            if request.user.is_authenticated:
+                cart_id = request.user.cart_user.first().id
+            else:
+                try:
+                    cart_id = request.session['cart_id']
+                except KeyError:
+                    return JsonResponse({'msg': 'سرور در حال حاضر مشکل دارد', 'code': 402, 'status': 'nok'})
         cart_qs = Cart.objects.filter(id=cart_id)
         if not cart_qs.exists():
             return JsonResponse(data={'msg': 'سبد خرید انتخاب شده فاقد اعتبار است', 'code': 402, 'status': 'nok'})
