@@ -16,27 +16,27 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-    path('password_reset/',
-         auth_views.PasswordResetView.as_view(template_name='login/templates/forget_password/password_reset.html',
+    path('password-reset/',
+         auth_views.PasswordResetView.as_view(template_name='login/forget-password/password-reset.html',
                                               form_class=forms_forget_passwords.PasswordResetF,
                                               from_email='green_apple@gmail.com',
                                               # email_template_name='login/templates/forget_password/password_reset_email.html', OR below:
-                                              email_template_name='login/templates/forget_password/subject_email_template.txt',
-                                              success_url=reverse_lazy('login:password_reset_done')),
-         name='password_reset'),
+                                              email_template_name='login/forget-password/password-reset-email.html',
+                                              success_url=reverse_lazy('login:password-reset-done')),
+         name='password-reset'),
 
-    path('password_reset_done/',
-         auth_views.PasswordResetDoneView.as_view(template_name='login/templates/forget_password/password_reset_done.html'),
-         name='password_reset_done'),
+    path('password-reset-done/',
+         auth_views.PasswordResetDoneView.as_view(template_name='login/forget-password/password-reset-done.html'),
+         name='password-reset-done'),
 
-    path('password_reset_confirm/<uidb64>/<token>/',
-         auth_views.PasswordResetConfirmView.as_view(template_name='login/templates/forget_password/password_reset_confirm.html',
+    path('password-reset-confirm/<uidb64>/<token>/',
+         auth_views.PasswordResetConfirmView.as_view(template_name='login/forget-password/password-reset-confirm.html',
                                                      form_class=forms_forget_passwords.SetPasswordF,
-                                                     success_url=reverse_lazy('login:password_reset_complete'),
+                                                     success_url=reverse_lazy('login:password-reset-complete'),
                                                      ),
-         name='password_reset_confirm'),
+         name='password-reset-confirm'),
 
-    path('password_reset_complete/',
-         auth_views.PasswordResetCompleteView.as_view(template_name='login/templates/forget_password/password_reset_complete.html'),
-         name='password_reset_complete')
+    path('password-reset-complete/',
+         auth_views.PasswordResetCompleteView.as_view(template_name='login/forget-password/password-reset-complete.html'),
+         name='password-reset-complete')
 ]
