@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block title %}به فروشگاه لاتاری تیکت خوش آمدید{% endblock title %}
+
+
+
+{% block content %}
+<p>links to about us and contact us:</p>
+<a href="{% url 'vitrin:index' %}#about-us">about us</a>
+<a href="{% url 'vitrin:index' %}#contact-us">contact us</a>
+<div id="about-us" style="margin-top: 1000px;">
+    <h1>درباره ما</h1>
+</div>
+<div id="contact-us" style="margin-top: 1000px;">
+    <h1>تماس با ما</h1>
+</div>
+{% endblock content %}
