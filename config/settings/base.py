@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'django_quill',
-    'silk',
+    # 'silk',
     'sorl.thumbnail',
     'constance',
     # To be able to use database for 'constance'
@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'order',
     'payment',
     'ticket',
+    'support',
+    'dashboard',
 ]
 
 
@@ -60,7 +62,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     
-    'silk.middleware.SilkyMiddleware',				   # To enable django-silk
+    # 'silk.middleware.SilkyMiddleware',				   # To enable django-silk
     
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',

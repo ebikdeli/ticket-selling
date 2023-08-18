@@ -1,0 +1,77 @@
+{% load static %}
+
+
+<header>
+    <nav class="no-print navbar navbar-expand-sm mb-0">
+      <div class="container-fluid">
+        <!-- Index url -->
+        <a href="{% url 'vitrin:index' %}">
+          <div class="w-100">
+            <img id="logo-image" src="https://cdn.dsmcdn.com/web/logo/ty-web-white.svg" alt="trendyol logo">
+          </div>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
+          <ul class="nav-icons navbar-nav me-auto mb-2 mb-lg-0">
+            <!-- Rules url -->
+            <a href="{% url 'support:rule' %}">
+              <div class="d-flex justify-content-center align-items-center">
+                <small>قوانین وبسایت</small>
+              </div>
+            </a>
+            <!-- Contact us url -->
+            <a href="{% url 'support:about-contact-us' %}#contact-us">
+              <div class="d-flex justify-content-center align-items-center">
+                <small>تماس با ما</small>
+              </div>
+            </a>
+            <!-- about us url -->
+            <a href="{% url 'support:about-contact-us' %}#about-us">
+              <div class="d-flex justify-content-center align-items-center">
+                <small>درباره ما</small>
+              </div>
+            </a>
+            <!-- Index url -->
+            <a href="{% url 'vitrin:index' %}">
+              <div class="d-flex justify-content-center align-items-center">
+                <small>صفحه اصلی</small>
+              </div>
+            </a>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Icons in the header -->
+    <div class="header-icons">
+      {% if request.user.is_authenticated %}
+        <a href="{% url 'dashboard:profile' %}">
+      {% else %}
+        <a href="{% url 'login:login-signup' %}">
+      {% endif %}
+        <div class="d-flex justify-content-between align-items-center">
+          <i class="bi bi-person"></i>
+          {% if request.user.is_authenticated %}
+            <p>پروفایل</p>
+          {% else %}
+            <p>ورود</p>
+          {% endif %}
+        </div>
+      </a>
+      <a href="{% url 'cart:cart-view' %}">
+        <div class="d-flex justify-content-between align-items-center" title="سبد خرید"
+        style="gap: 3px;">
+          <i class="bi bi-cart"></i>
+          <span class="header-cart-quantity">{{ cart.total_quantity }}</span>
+        </div>
+      </a>
+      <a href="{% url 'order:my-tickets' %}">
+        <div class="d-flex justify-content-between align-items-center" title="سفارشات من">
+          <i class="bi bi-gift"></i>
+          <p>سفارشات من</p>
+        </div>
+      </a>
+    </div>
+</header>

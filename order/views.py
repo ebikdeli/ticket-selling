@@ -79,3 +79,10 @@ def order_detail(request, order_id=None):
         print('THIS ORDER HAS BEEN REGISTERED')
     context = {'order': order}
     return render(request, 'order/order-detail.html', context=context)
+
+
+
+@login_required
+def my_tickets(request):
+    """Return list of all of the tickets bought by user in history"""
+    pass

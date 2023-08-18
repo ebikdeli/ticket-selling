@@ -12,8 +12,12 @@ from django.utils.translation import gettext_lazy as _
 from .forms import UserPasswordChangeForm
 from .login import user_signup_login, user_password_change
 # from cart.cart_functions import synch_cart_session_cart_after_authentication
-
 import json
+
+
+def login_signup(request):
+    """login and signup page form integrated into single page. All form validation happening in front-end"""
+    pass
 
 
 # @cache_page(60 * 15)

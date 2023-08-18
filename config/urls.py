@@ -8,7 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),     # Enable 'ckeditor' editor
     path('__debug__/', include('debug_toolbar.urls')),    # Enable 'django-debug-toolbar'
-    path('silk/', include('silk.urls', namespace='silk')),    # Enable 'django-silk'
+    # path('silk/', include('silk.urls', namespace='silk')),    # Enable 'django-silk'
     path('watchman/', include('watchman.urls')),    # Enable 'django-watchman'
     path('api-auth/', include('rest_framework.urls')),    # ...defined as 'accounts' subdirectory in 'hosts.py' module
     # path('token-auth/', token_view.obtain_auth_token),    # But in this example 'accounts.tests' module only works with
@@ -18,6 +18,8 @@ urlpatterns = [
     path('order/', include('order.urls')),
     path('payment/', include('payment.urls')),
     path('ticket/', include('ticket.urls')),
+    path('support/', include('support.urls')),
+    path('dashboard', include('dashboard.urls')),
     path('', include('vitrin.urls')),
 ]
 

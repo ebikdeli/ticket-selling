@@ -2,19 +2,367 @@
 {% load static %}
 
 
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/_header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vitrin/main.css' %}">
+{% endblock head %}
 
-{% block title %}به فروشگاه لاتاری تیکت خوش آمدید{% endblock title %}
 
+
+{% block title %}خرید بلیط لاتاری از ترندویل{% endblock title %}
 
 
 {% block content %}
-<p>links to about us and contact us:</p>
-<a href="{% url 'vitrin:index' %}#about-us">about us</a>
-<a href="{% url 'vitrin:index' %}#contact-us">contact us</a>
-<div id="about-us" style="margin-top: 1000px;">
-    <h1>درباره ما</h1>
-</div>
-<div id="contact-us" style="margin-top: 1000px;">
-    <h1>تماس با ما</h1>
-</div>
+<input type="hidden" name="cart-id" value="{{ cart.id }}" class="cart-id">
+
+  <!-- ******* 'content' block in 'base.html' ******* -->
+  <main class="mx-auto">
+    <!-- * Header -->
+    <section class="top-header">
+      <div class="d-flex justify-content-center align-items-center flex-wrap" style="gap: 10px;">
+        <a href="#">
+          <img id="belit-header-logo" src="https://cdn.dsmcdn.com/web/logo/ty-web.svg" alt="trendyol logo">
+        </a>
+        <div id="belit-header-text">
+          <h4 class="m-0">ثبت نام بلیط</h4>
+        </div>
+      </div>
+
+      <!-- Icons in the header -->
+      <div class="header-icons">
+        {% if request.user.is_authenticated %}
+          <a href="{% url 'dashboard:profile' %}">
+        {% else %}
+          <a href="{% url 'login:login-signup' %}">
+        {% endif %}
+          <div class="d-flex justify-content-between align-items-center">
+            <i class="bi bi-person"></i>
+            {% if request.user.is_authenticated %}
+              <p>پروفایل</p>
+            {% else %}
+              <p>ورود</p>
+            {% endif %}
+          </div>
+        </a>
+        <a href="{% url 'cart:cart-view' %}">
+          <div class="d-flex justify-content-between align-items-center" title="سبد خرید"
+          style="gap: 3px;">
+            <i class="bi bi-cart"></i>
+            <span class="header-cart-quantity">{{ cart.total_quantity }}</span>
+          </div>
+        </a>
+        <a href="{% url 'order:my-tickets' %}">
+          <div class="d-flex justify-content-between align-items-center" title="سفارشات من">
+            <i class="bi bi-gift"></i>
+            <p>سفارشات من</p>
+          </div>
+        </a>
+      </div>
+    </section>
+    <!-- * Header -->
+
+    <!-- * Main ad image -->
+    <section class="mx-auto" style="margin-bottom: 24px;">
+      <img src="{% static 'image/main-ad.gif' %}" id="main-ad-image" alt="main-ad-gif" style="border-radius: 5px;">
+    </section>
+    <!-- * Main ad image -->
+
+    <!-- * Buttons -->
+    <section id="belit-buttons" class="my-4 d-flex justify-content-start align-items-center">
+      <a href="">
+        <button class="btn belit-buttons belit-buttons-active">محصولات</button>
+      </a>
+      <a class="" href="./rules.html">
+        <button class="btn belit-buttons">قوانین</button>
+      </a>
+      <a class="" href="./faq.html">
+        <button class="btn belit-buttons">سوالات پرتکرار</button>
+      </a>
+    </section>
+    <!-- * Buttons -->
+
+
+    <!-- * Belit-Order -->
+
+
+    <div class="bc-popup">
+    </div>
+
+    {% comment %} If no tickets show folliwing div {% endcomment %}
+    {% if not tickets %}
+    <div>
+      <h3>بلیطی برای خرید وجود ندارد</h3>
+    </div>
+    {% else %}
+
+    
+    <section class="belit-order-section d-flex justify-content-start align-items-center">
+      <!-- * Belit-Card -->
+    <div class="belit-card-part d-flex justify-content-start align-items-center flex-wrap">
+      <!-- Top part in Belit-Card -->
+      <!-- For active belit come here (START) -->
+      {% for ticket in tickets %}
+      <div class="belit-card {% if not ticket.is_active %} card-disabled {% endif %}" belit-counter="{{ forloop.counter }}" system-ticket-number="{{ ticket.ticket_number }}">
+        <div class="belit-card-top mx-auto">
+          <p class="">ارزش محصول</p>
+          <p class="prize_money">
+            <span class="prize_money-number">{{ ticket.prize_value }}</span>&nbsp;<span>تومان</span>
+          </p>
+          <div class="py-2" style="position: relative;">
+            <img src="{{ ticket.image.url }}" alt="{{ ticket.name }}" class="belit-card-image">
+            <img src="{% static 'image/added-image.svg' %}" alt="added-image.svg" class="belit-card-added-image">
+          </div>
+          <div class="belit-number-left px-1">
+            <p class="prize_money d-flex justify-content-center align-items-center">
+              <span class="belit-reward-quantity" style="font-size: 11px;">1</span>&nbsp;<span>عدد</span>
+            </p>
+          </div>
+        </div>
+        <!-- Separator line in Belit-Card -->
+        <div class="">
+          <div class="belit-card-separator"></div>
+        </div>
+        <!-- Bottom part in Belit-Card -->
+        <div class="belit-card-bottom">
+          <div class="text-end">
+            <p class="belit-name mb-1">{{ ticket.name|truncatechars:45 }}</p>
+            <p class="belit-price">
+              <span class="belit-price-number">{{ ticket.price }}</span>&nbsp;<span>تومان</span>
+            </p>
+          </div>
+          <div class="belit-card-tarikh my-2">
+            <small class="d-flex justify-content-center align-items-start flex-column gap-1">
+              <span>تاریخ قرعه کشی:</span><span class='ticket-date'>{{ ticket.lottery_date|date:"d/m/Y" }} - {{ ticket.lottery_date|time:"H:i" }}</span>
+            </small>
+          </div>
+          <!-- <div class="text-end">
+            <p class="satilan">
+              <span>پیشرفت:</span>&nbsp;<span class="prize_money">%</span><span class="prize_money">35</span>
+            </p>
+          </div> -->
+          <!-- Progress indicator -->
+          <div class="belit-progress mt-1">
+            <span></span>
+            <!-- <hr style="width:50%;text-align:left;margin-left:0"> -->
+          </div>
+        </div>
+
+        <!-- Add belit to cart part -->
+        <div class="belit-card-add-cart">
+          {% comment %} If ticket is in the cart don't show below button {% endcomment %}
+          <button class="belit-card-add-cart-button btn d-flex justify-content-center align-items-center px-0
+          {% if ticket in cart.ticket.all %}d-none{% endif %}"
+            data-belit-id="{{ ticket.id }}">
+            خرید بلیط
+          </button>
+          {% comment %} if ticket is in the cart show below div {% endcomment %}
+          <div class="belit-card-add-cart-inc-dec d-flex justify-content-between align-items-center
+          {% if ticket not in cart.ticket.all %}d-none{% endif %}">
+            <button class="belit-card-dec belit-card-dec-button">
+              <i class="fas fa-minus belit-card-dec-button"></i>
+            </button>
+            <input class="text-center belit-quantity-input" type="number" data-belit-id="{{ ticket.id }}" min="1" max="150"
+              value={% if ticket in cart.ticket.all %}
+                      {% for ts in ticketsolds %}
+                        {% if ts.ticket == ticket %}
+                        "{{ ts.quantity }}"
+                        {% endif %}
+                      {% endfor %}
+                    {% else %}
+                    "1"
+                    {% endif %}
+            >
+            <button class="belit-card-inc belit-card-inc-button">
+              <i class="fas fa-plus belit-card-inc-button"></i>
+            </button>
+          </div>
+        </div>
+        <!-- * These are the data needed for popup section that entirely executed in JS -->
+        <span class="ticket-content d-none">{{ ticket.content }}</span>
+      </div>
+      {% endfor %}
+      <!-- For active belit come here (END) -->
+
+    </div>
+
+
+    <!-- * Order-Box -->
+    <div class="order-box">
+      <div class="m-0 text-end" style="color: #333;">خلاصه سفارش</div>
+      <div class="order-box-separator"></div>
+      <!-- When user selects a belit, this block (order-empty) changed with another block (order-fill) (START) -->
+      {% comment %} ! If cart is empty show this block {% endcomment %}
+      <div class="order-empty text-center
+      {% if cart.total_quantity %}d-none{% endif %}">
+        <div>
+          <img src="{% static 'image/exclamation-.png' %}" alt="exclamation mark" class="order-empty-img">
+        </div>
+        <p class="m-0">بلیطی خریداری نشده</p>
+        <p class="m-0">پس از خریداری بلیط سفارش خود را در اینجا ببینید</p>
+      </div>
+      <!-- When user selects a belit, this block (order-empty) changed with another block (order-fill) (END) -->
+      {% comment %} ! If cart is NOT empty show this block {% endcomment %}
+      <div class="order-fill 
+      {% if not cart.total_quantity %}
+        d-none
+      {% endif %}">
+
+        <div class="belit-orders-box">
+          {% if cart.total_quantity %}
+            {% for ts in  ticketsolds %}
+              <div class='belit-orders d-flex justify-content-center align-items-center'>
+                <p class="belit-orders-name">{{ ts.ticket.name|truncatechars:35 }}</p>
+                <p class="belit-orders-price">
+                  <span>{{ ts.price }}</span>&nbsp;<span style="font-size: 12px;">تومان</span>
+                </p>
+                <div class="d-flex justify-content-center align-items-center">
+                  <button class="order-fill-button belit-card-dec order-fill-button-dec btn"><i class="fas fa-minus order-fill-button-dec"></i></button>
+                  <input type="number" data-belit-id="{{ ts.ticket.id }}" data-ticketsold-id="{{ ts.id }}" value="{{ ts.quantity }}" min="1" max="150" maxlength="3" class="order-fill-input belit-quantity-input">
+                  <button class="order-fill-button belit-card-inc order-fill-button-inc btn"><i class="fas fa-plus order-fill-button-inc"></i></button>
+                </div>
+              </div>
+            {% endfor %}
+          {% endif %}
+        </div>
+
+        <!-- Total orders -->
+        <div class="total-orders d-flex justify-content-center align-content-center flex-column">
+          <!-- total belit -->
+          <div class="d-flex justify-content-between align-items-center">
+            <p>جمع بلیط ها:</p>
+            <p class="d-flex justify-content-center align-items-center">
+              <span id="total-belit">{{ cart.total_quantity }}</span>&nbsp;<span>عدد</span>
+            </p>
+          </div>
+          <!-- total price -->
+          <div class="d-flex justify-content-between align-items-center">
+            <p>جمع قیمت:</p>
+            <p class="d-flex justify-content-center align-items-center">
+              <span id="total-price">{{ cart.total_price }}</span>&nbsp;<span>تومان</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- دکمه ادامه جهت پرداخت-->
+        <button class="belit-order-payment-button w-100 d-flex justify-content-center align-items-center">
+          <span>پرداخت</span>
+          <i class="bi bi-chevron-left"></i>
+        </button>
+        <p id="belit-order-alert">بلیط های فروخته شده قابل پس دادن نمی باشند</p>
+      </div>
+      <!-- (END) order-fill -->
+    </div>
+    </section>
+
+    {% endif %}
+    
+    <!-- * Popup section (DISABLES FOR NOW) -->
+<!--     
+    <section class="popup-section d-none" id=":Rl9:" data-backdrop="static" data-keyboard="false">
+      <div class="YS90kWge" data-test-id="popup-backdrop">
+        <div class="f1nagVF0 AWVo0QOv" id="popup-cadre">
+          <header class="pNKyhYGM d-flex justify-content-between align-items-center">
+            <p data-testid="WTypography"
+              class="mQk9NoTR QOZc98nI x5a8pADS PczFZ0qG PebTJIWS iEc8RVrR popup-text-header">احراز هویت</p>
+            <span class="RRwchM_2" data-testid="popup-close-button">
+              <button type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </span>
+          </header>
+          <div class="VVNHVth4 W0dfwGUX">
+            <p data-testid="WTypography" class="mQk9NoTR mPs04A4r x5a8pADS PczFZ0qG JLvdDDuX">برای شرکت در قرعه کشی باید
+              بالای 18 سال سن داشته باشید. با وارد کردن اطلاعات خود، احراز هویت خواهید شد</p>
+            <p data-testid="WTypography" class="mQk9NoTR mPs04A4r x5a8pADS jcmPQqiY YC3XKTkj">مشخصات خود را
+              به صورت صحیح و دقیق وارد کنید</p>
+            <form action="" method="post" name="identity-check-form" id="identity-check" class="CTTAE3TF">
+              <div id="error-box-wrapper" class="d-none">
+                <i class="bi bi-exclamation-circle"></i>
+                <span class="message">خطا در این قسمت ظاهر می شود</span>
+              </div>
+              <div class="fzJpChZ5">
+                <div class="surqca_X K8dSF66p H_QYMGlc" style="max-width: 225px !important;">
+                  <label for=":r3i:" class="dtZcumdX kaRo6NoN" style="color: #333;">نام</label>
+                  <div class="Y9vANfzi e80bHszM" style="border-color: #e6e6e6;">
+                    <span class="l1iOUiPQ"></span>
+                    <input type="text" placeholder="نام" maxlength="50" name="first-name" id=":r3i:" class="sM5lDC2n"
+                      value="">
+                  </div>
+                  <div class="o_fDlFpW">
+                    <p data-testid="error-label" class="mQk9NoTR mPs04A4r x5a8pADS pzMMgeuR kaRo6NoN">وارد کردن نام
+                      الزامی است</p>
+                  </div>
+                </div>
+                <div class="surqca_X K8dSF66p H_QYMGlc" style="max-width: 225px !important;">
+                  <label for=":r37:" class="dtZcumdX kaRo6NoN" style="color: #333;">نام خانوادگی</label>
+                  <div class="Y9vANfzi e80bHszM" style="border-color: #e6e6e6;">
+                    <span class="l1iOUiPQ"></span>
+                    <input type="text" placeholder="نام خانوادگی" maxlength="50" name="last-name" id=":r37:"
+                      class="sM5lDC2n" value="">
+                  </div>
+                  <div class="o_fDlFpW">
+                    <p data-testid="error-label" class="mQk9NoTR mPs04A4r x5a8pADS pzMMgeuR kaRo6NoN">وارد کردن نام
+                      خانوادگی الزامی است</p>
+                  </div>
+                </div>
+              </div>
+              <div data-testid="w-datepicker">
+                <p data-testid="WTypography" class="mQk9NoTR pJadFwet x5a8pADS PczFZ0qG PebTJIWS v7f8805S">تاریخ تولد
+                </p>
+                <div class="MuiFormControl-root MuiTextField-root ZMADHewP css-i44wyl"
+                  style="border: 1px solid #e6e6e6;">
+                  <div
+                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedEnd css-1bn53lx">
+                    <input aria-invalid="false" autocomplete="off" id=":r38:" placeholder="DD.MM.YYYY" type="date"
+                      name="birth-date"
+                      class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-1uvydh2 birth-date"
+                      value="" id="birth-date">
+                  </div>
+                </div>
+                <div class="CWqmPVS3">
+                  <p data-testid="error-label" class="mQk9NoTR mPs04A4r x5a8pADS PczFZ0qG Nd7aFdrR YpWAd_kY">وارد کردن
+                    تاریخ تولد اجباری است</p>
+                </div>
+              </div>
+              <div class="surqca_X K8dSF66p" style="margin-top: 20px;">
+                <label for=":r3a:" class="dtZcumdX" style="font-size: 14px;">شماره ملی</label>
+                <div class="Y9vANfzi">
+                  <span class="l1iOUiPQ"></span>
+                  <input id=":r3a:" class="sM5lDC2n" placeholder="شماره ملی" name="identifier" maxlength="11">
+                </div>
+                <div class="o_fDlFpW">
+                  <p data-testid="error-label" class="mQk9NoTR mPs04A4r x5a8pADS pzMMgeuR kaRo6NoN">وارد کردن شماره ملی
+                    اجباری است</p>
+                </div>
+              </div>
+              <div class="L37u5Vnh mt-3">
+                <div class="SctmRA24" data-testid="w-checkbox">
+                  <input class="form-check-input" type="checkbox" value="" name="agree" id="agree-law">
+                  <div class="hzZ5Csrb">
+                    <label class="IO5UmHup" for=":r3b:">
+                      <div style="display: flex; flex-direction: row;">
+                        <p data-testid="WTypography" class="mQk9NoTR mPs04A4r x5a8pADS jcmPQqiY lkuvt_Og ecvPfvur">
+                          قوانین</p>&nbsp;
+                        <p data-testid="WTypography" class="mQk9NoTR mPs04A4r x5a8pADS alE4WpA0">را خوانده و میپذیرم</p>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <button class="JqToMYhl S1BWb58t d91GY0l4 ZeRLQvQH lOByNZrX" type="submit"
+              form="identity-check">تایید</button>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+  </main>
+
+
 {% endblock content %}
+
+
+{% block script %}
+  <script type="module" src="{% static 'js/vitrin/main.js' %}"></script>
+{% endblock script %}

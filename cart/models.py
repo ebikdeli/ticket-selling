@@ -85,7 +85,7 @@ class Cart(models.Model):
             for ticketsold_session in request.session['cart']:
                 if ticketsold_session['ticketsold_id'] == ticketsold.id:
                     ticketsold_session['quantity'] += int(quantity)
-        # If the ticket is not in the cart before
+        # If the icketsold is not in the cart before
         else:
             ticketsold = cart.ticketsold_cart.create(ticket=ticket)
             if request.user.is_authenticated:
@@ -97,6 +97,12 @@ class Cart(models.Model):
                                'ticket_id': ticket.id,
                                'quantity': int(quantity)}
             request.session['cart'].append(new_ticket_data)
+        # If the ticket is not in the cart append it to the cart else igonre following block
+        if not ticket in self.ticket.all():
+            print('add ticket to the cart')
+            self.ticket.add(ticket)
+        else:
+            print('ticket already is in the cart')
         # Update session with updated Cart
         set_session_cart(request, cart)
         return True
@@ -116,6 +122,9 @@ class Cart(models.Model):
 
     def delete_item(self, request:HttpRequest, ticketsold:object , *args, **kwargs) -> bool:
         """Delete an ticket from the cart. If properly executed returns True else False"""
+        # Remove ticket from cart
+        ticket = ticketsold.ticket
+        self.ticket.remove(ticket)
         ticketsold.delete()
         # Delete current ticket from 'cart' session
         for ticketsold_session in request.session['cart']:

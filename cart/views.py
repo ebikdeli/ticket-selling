@@ -106,7 +106,7 @@ def change_ticket_cart(request):
         if not result:
             return JsonResponse(data={'msg': 'مشکلی پیش آمده و تعداد بلیط ها افزایش نیافت', 'code': 402, 'status': 'nok'})
         # Item successfully added to cart
-        return JsonResponse(data={'msg': 'عملیات افزایش تعداد بلیط با موفقیت انجام گرفت', 'code': 201, 'status': 'ok'})
+        return JsonResponse(data={'msg': 'عملیات تغییر تعداد بلیط با موفقیت انجام گرفت', 'code': 201, 'status': 'ok'})
     # If any method except of the 'POST' come, send following message
     return JsonResponse(data={'msg': 'bad request method', 'code': 400, 'status': 'nok'})
 
@@ -124,18 +124,6 @@ def delete_ticket_cart(request):
         # if not ticketsold_id or not quantity:
         if not ticket_id:
             return JsonResponse(data={'msg': 'دیتای دریافتی فاقد اعتبار است', 'code': 402, 'status': 'nok'})
-        # get product to be deleted
-        # ticketsold_qs = TicketSold.objects.filter(id=ticketsold_id)
-        ticket_qs = Ticket.objects.filter(id=ticket_id)
-        # if not ticketsold_qs.exists():
-        if not ticket_qs.exists():
-            return JsonResponse(data={'msg': 'کد بلیط انتخاب شده اشتباه است', 'code': 402, 'status': 'nok'})
-        # ticketsold = ticketsold_qs.get()
-        ticket = ticket_qs.get()
-        ticketsold_qs = TicketSold.objects.filter(ticket=ticket, cart=cart)
-        if not ticketsold_qs.exists():
-            return JsonResponse({'msg': 'سرور در پردازش سبد خرید و بلیط خریداری شده مشکل دارد', 'code': 402, 'status': 'nok'})
-        ticketsold = ticketsold_qs.get()
         # get the cart that ticket should get deleted from
         if not cart_id:
             if request.user.is_authenticated:
@@ -149,6 +137,18 @@ def delete_ticket_cart(request):
         if not cart_qs.exists():
             return JsonResponse(data={'msg': 'سبد خرید انتخاب شده فاقد اعتبار است', 'code': 402, 'status': 'nok'})
         cart = cart_qs.get()
+        # get product to be deleted
+        # ticketsold_qs = TicketSold.objects.filter(id=ticketsold_id)
+        ticket_qs = Ticket.objects.filter(id=ticket_id)
+        # if not ticketsold_qs.exists():
+        if not ticket_qs.exists():
+            return JsonResponse(data={'msg': 'کد بلیط انتخاب شده اشتباه است', 'code': 402, 'status': 'nok'})
+        # ticketsold = ticketsold_qs.get()
+        ticket = ticket_qs.get()
+        ticketsold_qs = TicketSold.objects.filter(ticket=ticket, cart=cart)
+        if not ticketsold_qs.exists():
+            return JsonResponse({'msg': 'سرور در پردازش سبد خرید و بلیط خریداری شده مشکل دارد', 'code': 402, 'status': 'nok'})
+        ticketsold = ticketsold_qs.get()
         # get ticketsold
         # Delete ticket from the cart
         result = cart.delete_item(request, ticketsold)

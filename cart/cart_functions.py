@@ -23,7 +23,7 @@ def reset_session(request: HttpRequest) -> None:
 
 def set_session_cart(request: HttpRequest, cart: object) -> None:
     """Set cart session values to Cart fields values. 'cart' is an instance of Cart"""
-    request.session['total_quantity'] = cart.quantity
+    request.session['total_quantity'] = cart.total_quantity
     request.session['price'] = int(cart.price)
     request.session['total_price'] = int(cart.total_price)
 

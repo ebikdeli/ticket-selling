@@ -7,12 +7,13 @@ from . import forms_forget_passwords
 app_name = 'login'
 
 urlpatterns = [
-    path('login/', views.classic_login, name='classic-login'),
-    path('logout/', views.logout_view, name='logout'),
-    path('signup/', views.signup, name='signup'),
-    path('password-change', views.password_change, name='password-change'),
-    path('edit-profile', views.edit_profile, name='edit-profile'),
-    path('edit-profile-image', views.edit_profile_image, name='edit-profile-image'),
+     path('login-signup/', views.login_signup, name='login-signup'),
+     path('login/', views.classic_login, name='classic-login'),
+     path('logout/', views.logout_view, name='logout'),
+     path('signup/', views.signup, name='signup'),
+     path('password-change', views.password_change, name='password-change'),
+     path('edit-profile', views.edit_profile, name='edit-profile'),
+     path('edit-profile-image', views.edit_profile_image, name='edit-profile-image'),
 ]
 
 urlpatterns += [
