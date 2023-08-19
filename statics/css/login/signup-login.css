@@ -1,0 +1,613 @@
+:root{
+    --orange-color: #f27a1a;
+    --border-color: #e6e6e6;
+}
+
+body{
+    background-color: #FAFAFA;
+}
+
+main{
+    direction: ltr;
+}
+
+/* * Login-register section */
+.ls-body{
+    width: 415px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.ls-title{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    color: #333333;
+}
+
+.ls-title > h1{
+    font-size: 22px;
+    line-height: 28px;
+}
+
+.ls-title > h3{
+    font-size: 16px;
+    line-height: 21px;
+    margin-bottom: 20px;
+}
+
+.ls-change-buttons{
+    /* background-color: #fafafa; */
+    /* background-color: #fff; */
+    display: block;
+    /* padding: 10px; */
+    margin: 0;
+    border: 0;
+    outline: none;
+    user-select: none;
+}
+
+.ls-buttons{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    align-items: flex-end;
+}
+
+/* * These blocks used for Login-Singup button switch (START) */
+.tab.button.active {
+    color: #f27a1a !important;
+    background-color: #fff !important;
+    border: 1px solid #e6e6e6 !important;
+    border-bottom: 0 !important;
+}
+
+.tab.button {
+    width: 100% !important;
+    height: 48px !important;
+    color: #333333 !important;
+    background-color: #f2f2f2 !important;
+    border-radius: 3px 3px 0 0;
+    border: none !important;
+    border-bottom: none;
+    display: inline-block !important;
+    position: relative;
+}
+
+/* Why this???!!!! */
+/* .q-button.q-secondary {
+    background-color: #fff;
+    color: #f27a1a;
+    border: 1px solid #f27a1a;
+} */
+
+.q-button.q-button-medium {
+    height: 44px;
+    font-size: 16px;
+}
+
+.mr-5 {
+    margin-right: 5px;
+}
+
+.q-button {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    user-select: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: 400;
+    /* font-family: "Source Sans Pro",sans-serif; */
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    border-radius: 3px;
+}
+
+.left {
+    float: left;
+}
+
+.rigth{
+    float: right;
+}
+/* * These blocks used for Login-Singup button switch (END) */
+
+
+/* ! Error section */
+#error-box-wrapper {
+    direction: rtl;
+    color: #d0021b;
+    line-height: 15px;
+    padding: 14px 20px 13px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    border: 1px solid;
+    border-radius: 3px;
+    background-color: #fff4f6;
+}
+
+#error-box-wrapper .message {
+    font-size: 12px;
+    padding-left: 7px;
+    padding-right: 7px;
+    font-weight: 600;
+    display: table-cell;
+    vertical-align: middle;
+    line-height: 12px;
+}
+
+/* *** Login-Singup forms */
+.ls-container{
+    border: 1px solid #e6e6e6;
+    border-top: 0;
+    padding: 35px 40px 40px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+/* * Login */
+.login {
+    padding: 0;
+    background-color: #fff;
+}
+
+.l-layout {
+    /* background-color: #fafafa; */
+    display: block;
+    padding: 10px;
+    margin: 0;
+    border: 0;
+    /* font-family: "Source Sans Pro",sans-serif; */
+    outline: none;
+    user-select: none;
+}
+
+.q-input-wrapper {
+    display: block;
+    text-align: left;
+}
+
+.q-input-wrapper .q-label {
+    text-align: right;
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 0;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.email-input input {
+    height: 44px !important;
+}
+
+.q-input {
+    width: 100% !important;
+    border-radius: 3px !important;
+    background-color: #fafafa !important;
+    outline: none;
+}
+
+.password-wrapper .password {
+    margin-top: 20px;
+    display: flex;
+    position: relative;
+}
+
+.password-wrapper .password .q-input-wrapper {
+    width: 100%;
+}
+
+/* .q-input-wrapper .q-label {
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 0;
+    color: #333;
+    margin-bottom: 10px;
+} */
+
+.password-wrapper .password .q-input-wrapper input {
+    padding-right: 40px;
+}
+
+.q-input-wrapper .q-input {
+    background-color: #ebebeb;
+    font-size: 14px;
+    border: 1px solid #e6e6e6;
+    width: inherit;
+    border-radius: 3px;
+    height: 40px;
+    padding: 10px;
+    color: #666;
+    -webkit-appearance: none;
+}
+
+.password-wrapper .password i {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+    color: #999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+}
+
+/* Forget password */
+.forgot-password {
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: end;
+}
+
+.forgot-password a {
+    color: #333333;
+    text-decoration: underline;
+    transition: all 0.3s ease;
+}
+
+/* Login-button */
+.q-button.q-fluid {
+    width: 100%;
+}
+
+.q-button.q-primary {
+    background-color: #f27a1a;
+    color: #fff;
+    border: 1px solid #f27a1a;
+}
+
+.q-button.q-button-medium {
+    height: 44px;
+    font-size: 16px;
+}
+
+.q-button {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    user-select: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: 400;
+    /* font-family: "Source Sans Pro",sans-serif; */
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    border-radius: 3px;
+}
+
+.submit {
+    margin-top: 20px;
+    height: 48px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+/* Signup Form */
+.q-typography.dark-gray {
+    color: #666;
+}
+
+.q-typography.dark-gray {
+    color: #666;
+}
+
+.password-wrapper p {
+    font-size: 12px !important;
+    margin-top: 3px;
+}
+
+.q-typography {
+    margin: 0;
+    font-family: "Source Sans Pro", "Helvetica", "Arial", sans-serif;
+    font-style: normal;
+    font-stretch: normal;
+}
+
+.register .gender {
+    margin-top: 20px;
+}
+
+.register .gender label {
+    color: #333333;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.register .gender .button-group {
+    width: 100%;
+}
+
+.register .gender .button-group .q-button.q-secondary {
+    border: 1px solid #f27a1a !important;
+}
+
+.q-button.q-secondary {
+    background-color: #fff;
+    color: #f27a1a;
+    border: 1px solid #f27a1a;
+}
+
+.register .gender .button-group .active {
+    background-color: #fff;
+    font-weight: 600;
+    border-radius: 4px !important;
+}
+
+.register .gender .button-group .female {
+    border-radius: 4px 0 0 4px;
+}
+
+.register .gender .button-group .male {
+    border-radius: 0 4px 4px 0;
+}
+
+.register .gender .button-group button {
+    height: 40px;
+    border: 1px solid #e6e6e6;
+    background-color: #fafafa;
+}
+
+.border-right-none {
+    border-right: none !important;
+}
+
+.border-left-none {
+    border-left: none !important;
+}
+
+.q-button.q-fluid {
+    width: 100%;
+}
+
+.q-button.q-gray {
+    background-color: #fff;
+    color: #666;
+    border: 1px solid #999;
+}
+
+.q-button.q-button-medium {
+    height: 44px;
+    font-size: 16px;
+}
+
+.border-right-none {
+    border-right: none !important;
+}
+
+/* .q-button {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    user-select: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: 400;
+    font-family: "Source Sans Pro",sans-serif;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    border-radius: 3px;
+} */
+
+/* Marketing checkbox */
+.register .marketing-checkbox {
+    direction: rtl;
+    margin-top: 15px;
+    gap: 15px;
+}
+
+.form-check {
+    display: block;
+    min-height: 0;
+    padding-left: 1.5em;
+    margin-bottom: 0;
+}
+
+.form-check-input{
+    cursor: pointer;
+    border-color: #999999;
+    border-radius: 2px !important;
+    border-width: 2px;
+    margin: 0;
+    height: 20px;
+    width: 20px;
+    outline: 0;
+    box-shadow: none;
+}
+
+.form-check-input:checked{
+    background-color: #f27a1a;
+    color: #f27a1a;
+    border-color: #f27a1a;
+}
+
+.form-check-input:focus {
+    border-color: #f27a1a;
+    outline: 0;
+    box-shadow: none;
+}
+
+.register .marketing-checkbox .ty-checkbox-text {
+    color: #666666;
+    font-size: 12px;
+    line-height: normal;
+}
+
+.ty-checkbox-wrapper .ty-checkbox-text {
+    height: auto;
+}
+
+.ty-font-md {
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.ty-color-soft-gray, .ty-input-w.ty-input-passive label {
+    color: #999;
+}
+
+.register .personal-checkbox {
+    margin-top: 15px;
+    direction: rtl;
+    gap: 15px;
+}
+
+.register .personal-checkbox .ty-checkbox-text {
+    color: #666666;
+    font-size: 12px;
+    line-height: normal;
+}
+
+.ty-checkbox-wrapper.ty-checkbox-active .ty-checkbox-text {
+    color: #666;
+}
+
+.ty-input-w .ty-text {
+    height: calc(1em + 4px*1 + 0px);
+}
+
+.ty-checkbox-wrapper .ty-checkbox-text {
+    height: auto;
+}
+
+.ty-input-w .ty-text {
+    height: calc(1em + 4px*1 + 0px);
+}
+
+.ty-font-md {
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.ty-color-soft-gray, .ty-input-w.ty-input-passive label {
+    color: #999;
+}
+
+.register .personal-checkbox .special-text {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.register .contract {
+    text-align: end;
+    margin-top: 10px;
+}
+
+.register .contract p {
+    color: #999999;
+    font-size: 12px;
+}
+
+
+/* Social Login */
+.social-account-login-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.social-account-login-buttons .social-login-button:first-child {
+    margin-right: 15px;
+}
+
+.social-account-login-buttons .social-login-button {
+    background-color: #fff;
+    font-size: 16px;
+    border-radius: 6px;
+    border: solid 1px #e6e6e6;
+    padding: 8px 10px;
+    align-items: flex-start;
+    align-self: flex-start;
+    line-height: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    /* transition-duration: 0.3s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+    transition-property: all; */
+}
+
+.social-login-button:hover{
+    background-color: #F2F2F2;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.flex {
+    display: flex;
+}
+
+/* Not needed */
+/* .q-layout {
+    background-color: #fafafa;
+    display: block;
+    padding: 10px;
+    margin: 0;
+    border: 0;
+    font-family: "Source Sans Pro",sans-serif;
+    outline: none;
+    user-select: none;
+} */
+
+.social-account-login-buttons .social-login-button .social-login-icon {
+    margin-right: 15px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    border-radius: 4px;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.social-account-login-buttons .social-login-button small {
+    font-size: 12px;
+    color: #999999;
+}
+
+/* Rules */
+.guest-user-track-orders {
+    direction: rtl;
+    display: inline-block;
+    color: #666;
+    margin-top: 20px;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.guest-user-track-orders .clickable-text {
+    color: #333;
+    text-decoration: underline;
+    margin-left: 2.5px;
+    cursor: pointer;
+}

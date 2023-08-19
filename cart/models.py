@@ -114,7 +114,7 @@ class Cart(models.Model):
         ticketsold.save()
         # Update 'cart' session with new quantity
         for ticketsold_session in request.session['cart']:
-            if ticketsold_session['ticketsold_id'] == ticketsold.id:
+            if ticketsold_session['ticket_id'] == ticketsold.ticket.id:
                 ticketsold_session['quantity'] = int(quantity)
         # Update session with updated Cart
         set_session_cart(request, ticketsold.cart)
@@ -128,7 +128,7 @@ class Cart(models.Model):
         ticketsold.delete()
         # Delete current ticket from 'cart' session
         for ticketsold_session in request.session['cart']:
-            if ticketsold_session['ticketsold_id'] == ticketsold.id:
+            if ticketsold_session['ticket_id'] == ticketsold.ticket.id:
                 request.session['cart'].remove(ticketsold_session)
         # Update 'total_quantity' 'price' and 'price_end' session that automatically updated in the current Cart
         set_session_cart(request, ticketsold.cart)
@@ -160,28 +160,29 @@ class Cart(models.Model):
                     ticket_id_list = list()
                     for ticketsold in ticketsolds_qs:
                         ticket_id_list.append(str(ticketsold.ticket.id))
-                    
+                    current_cart_ticket_id = list()
                     # Check If the ticket in the 'cart' session is same as any ticket in the TicketSold
                     for ticketsold in ticketsolds_qs:
                         for ticketsold_session in request.session['cart']:
                             # Add every ticketsold_session['ticket_id'] to a list to be used in '1.3' step
-                            current_cart_ticket_id = list()
-                            current_cart_ticket_id.append(ticketsold_session['ticket_id'])
+                            current_cart_ticket_id.append(str(ticketsold_session['ticket_id']))
                             # 1.1- If the session ticketsold_session is already in the TicketSold, just add quantity to the current TicketSold
-                            if ticketsold.ticket.id == ticketsold_session['ticket_id']:
-                                ticketsold.quantity += int(ticketsold_session['quantity'])
-                                print(f"{ticketsold_session['ticket_id']} is already in the cart and updated")
-                                ticketsold.save()
-                                ticketsold_session['quantity'] = ticketsold.quantity
+                            # if ticketsold.ticket.id == ticketsold_session['ticket_id']:
+                            if str(ticketsold_session['ticket_id']) in ticket_id_list:
+                                if str(ticketsold_session['ticket_id']) == str(ticketsold.ticket.id):
+                                    ticketsold.quantity += int(ticketsold_session['quantity'])
+                                    print(f"{ticketsold_session['ticket_id']} is already in the cart and updated")
+                                    ticketsold.save()
+                                    ticketsold_session['quantity'] = ticketsold.quantity
                             # 1.2- If the session ticketsold is not in the TicketSold, add new TicketSold to the Cart
-                            elif ticketsold_session['ticket_id'] not in ticket_id_list:
+                            elif str(ticketsold_session['ticket_id']) not in ticket_id_list:
                                 cart.ticketsold_cart.create(
                                     user=request.user,
                                     ticket=Ticket.objects.get(id=ticketsold_session['ticket_id']),
                                     quantity=int(ticketsold_session['quantity'])
                                 )
                                 # Append current 'ticket_id' to 'ticket_id_list' list to prevent duplication
-                                ticket_id_list.append(ticketsold_session['ticket_id'])
+                                ticket_id_list.append(str(ticketsold_session['ticket_id']))
                                 print(f"{ticketsold_session['ticket_id']} was not in the cart but added")
                         # 1.3- If the current TicketSold is not in the 'cart' session, add it to the session
                         if str(ticketsold.ticket.id) not in current_cart_ticket_id:
@@ -195,7 +196,7 @@ class Cart(models.Model):
                         cart.ticketsold_cart.create(
                             user=request.user,
                             ticket=Ticket.objects.get(id=ticketsold_session['ticket_id']),
-                            quantity = int(['quantity'])
+                            quantity = int(ticketsold_session['quantity'])
                         )
             # 2) If cart session is empty, check if there is any ticket in current Cart to put them into the empty session
             else:

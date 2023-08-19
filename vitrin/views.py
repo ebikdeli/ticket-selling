@@ -18,8 +18,3 @@ def index(request):
     ticketsolds = cart.ticketsold_cart.all()
     context = {'tickets': tickets, 'ticketsolds': ticketsolds}
     return render(request, 'vitrin/index.html', context)
-
-
-def show_tickets(request):
-    """Show all active tickets to the user"""
-    return render(request, '')

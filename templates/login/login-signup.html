@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/login/signup-login.css' %}">
+{% endblock head %}
+
+
+{% block title %}ورود-ثبت نام کاربر{% endblock title %}
+
+
+{% block content %}
+<main class="ls-body">
+    <div class="ls-title">
+      <h1>خوش آمدید</h1>
+      <h3>وارد حساب کاربری خود شوید، در غیر اینصورت ثبت نام کنید</h3>
+    </div>
+    <input type="hidden" name="cart-id" class="cart-id" value="{{ cart.id }}">
+    <!-- change button -->
+    <div class="ls-title ls-change-buttons">
+      <div class="ls-buttons">
+        <button class="q-secondary q-button-medium q-button tab button mr-5 left active" id="login-button">
+          <span>ورود</span>
+        </button>
+        <button class="q-secondary q-button-medium q-button tab button right" id="signup-button">
+          <span>ثبت نام</span>
+        </button>
+      </div>
+    </div>
+    <!-- * login-signup forms -->
+    <div class="ls-container">
+      <!-- Error section -->
+      <div id="error-box-wrapper" class="d-none">
+        <i class="bi bi-exclamation-circle"></i>
+        <span class="message">خطا در این قسمت ظاهر می شود</span>
+      </div>
+      <!-- Login section -->
+      <div class="l-layout login" id="login-section">
+        <form method="post" id="login-form">
+            {% csrf_token %}
+          <div class="q-input-wrapper email-input">
+            <label class="q-label">پست الکترونیکی</label>
+            <input class="q-input" type="text" id="login-username" list="email-list" name="username-login"
+              autocomplete="username" data-testid="email-input" value="" tabindex="-1">
+          </div>
+          <datalist id="email-list"></datalist>
+          <div class="password-wrapper">
+            <div class="password">
+              <div class="q-input-wrapper">
+                <label class="q-label">رمز عبور</label>
+                <input class="q-input" type="password" name="password-login" id="login-password"
+                  data-testid="password-input" autocomplete="current-password" value="">
+                <i class="bi bi-eye-slash togglePassword" id="togglePassword"></i>
+              </div>
+            </div>
+          </div>
+          <div class="forgot-password">
+            <a href="{% url 'login:password-reset' %}" dideo-checked="true">
+              <span>فراموشی رمز عبور</span>
+            </a>
+          </div>
+          <button class="q-primary q-fluid q-button-medium q-button submit" id="login-button" type="submit">
+            <span>ورود</span>
+          </button>
+        </form>
+      </div>
+      <!-- Signup section -->
+      <div class='q-layout register d-none' id="signup-section">
+        <form  method="post" id="signup-form">
+            {% csrf_token %}
+          <div class="q-input-wrapper email-input">
+            <label class="q-label">پست الکترونیکی</label>
+            <input class="q-input" type="text" id="signup-username" list="email-list" name="username-signup"
+              autocomplete="username" data-testid="email-input" value="" tabindex="-1">
+          </div>
+          <datalist id="email-list"></datalist>
+          <div class="password-wrapper">
+            <div class="password">
+              <div class="q-input-wrapper">
+                <label class="q-label">رمز عبور</label>
+                <input class="q-input" type="password" name="password-signup" id="signup-password"
+                  data-testid="password-input" autocomplete="current-password" value="">
+                <i class="bi bi-eye-slash togglePassword" id="togglePassword"></i>
+              </div>
+            </div>
+            <p class="q-typography q-paragraph q-initial dark-gray text-end">
+              <span class="password-info-text">رمز عبور شما باید حداقل 6 کاراکتر و حداکثر 30 کاراکتر باشد</span>
+            </p>
+          </div>
+          <div class="gender flex flex-column">
+            <label class="text-end">جنسیت (اختیاری)</label>
+            <div class="button-group flex">
+              <button class="q-gray q-fluid q-button-medium q-button female border-right-none" type="button">
+                <span>زن</span>
+              </button>
+              <button class="q-gray q-fluid q-button-medium q-button male" type="button">
+                <span>مرد</span>
+              </button>
+            </div>
+            <input type="hidden" name="gender" value="">
+          </div>
+          <div class="marketing-checkbox d-flex justify-content-center align-items-center">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="marketing-verify-checkbox">
+            </div>
+            <span class="ty-text ty-color-soft-gray ty-font-md ty-checkbox-text">من قبول می کنم که اطلاعات شخصی من جهت
+              استفاده در ارسال پیام های تبلیغاتی مورد استفاده قرار بگیرد</span>
+          </div>
+          <div class="personal-checkbox d-flex justify-content-center align-items-center">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="personal-verify-checkbox">
+            </div>
+            <span class="ty-text ty-color-soft-gray ty-font-md ty-checkbox-text">
+              <div>تایید می کنم که اطلاعات شخصی اینجانب طبق
+                <span class="special-text">قوانین و مقررات وبسایت </span>
+                مورد پردازش قرار گیرد
+              </div>
+            </span>
+          </div>
+          <button class="q-primary q-fluid q-button-medium q-button submit" type="submit"
+            data-testid="submit-button"><span>ثبت نام</span></button>
+          <!-- <div class="ty-display-flex ty-mgt-1">
+            <span class="ty-text ty-color-black ty-font-sm ty-font-w-bold"></span>
+            <span class="ty-text ty-color-soft-gray ty-font-sm ty-mgl-auto"></span>
+          </div> -->
+          <div class="contract flex">
+            <p>کلیک بر روی ثبت نام به این معنی است که شما با&nbsp;<b>قوانین و مقررات </b>وبسایت موافقت می کنید.</p>
+          </div>
+        </form>
+      </div>
+      <!-- Social media accounts buttons -->
+      {% comment %} ! SOCIAL AUTHENTICATION TO COME HERE {% endcomment %}
+      <div class="social-account-login-buttons">
+        <div class="btn q-layout social-login-button flex flex-1">
+          <div class="social-login-icon" style="background-color: rgb(241, 66, 54);"><i class="bi bi-google"
+              style="font-size: larger;"></i></div>
+          <div class="flex flex-column">
+            <div>
+              <div style="text-transform: capitalize;">google</div>
+              <small>ورود با</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% comment %} ! SOCIAL AUTHENTICATION TO COME HERE {% endcomment %}
+      <div class="guest-user-track-orders">قوانین و مقررات سایت را&nbsp;
+        <a href="{% url 'support:rule' %}" class="clickable-text">در اینجا</a>&nbsp;
+        مطالعه کنید
+      </div>
+    </div>
+  </main>
+{% endblock content %}
+
+
+{% block script %}
+<script src="{% static 'js/login/signup-login.js' %}" type="module"></script>
+{% endblock script %}

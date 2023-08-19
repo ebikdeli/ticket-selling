@@ -75,3 +75,10 @@ def create_address_after_user_created(sender, instance=None, created=False, **kw
     """Create Address model after user signup and created"""
     if created:
         Address.objects.create(user=instance)
+
+
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_cart_after_user_created(sender, instance, created, *args, **kwargs):
+    """Create a cart for user after user created"""
+    if created:
+        instance.cart_user.create()

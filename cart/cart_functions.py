@@ -95,7 +95,7 @@ def get_cart_and_cart_item_id(cart_model: object, cart_item_id: int, cart: objec
     return cartItem, cartItemProductId
 
 
-def sync_cart_session_cart_after_authentication(_model: object, request: HttpRequest) -> Tuple:
+def sync_session_cart_after_authentication(_model: object, request: HttpRequest) -> Tuple:
     """Helper function. Arguements: _model=Cart, request=HttpRequest.
     After user login or signup, create or get Cart for the user, set 'cart_id' session to current cart
     and synchronize Cart data with session data. Returns a tuple consist of (True, cart)."""

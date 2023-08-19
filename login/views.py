@@ -8,16 +8,15 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import gettext_lazy as _
 # from django.views.decorators.cache import cache_page, never_cache
-# from cart.models import Cart
+from cart.models import Cart
 from .forms import UserPasswordChangeForm
 from .login import user_signup_login, user_password_change
-# from cart.cart_functions import synch_cart_session_cart_after_authentication
 import json
 
 
 def login_signup(request):
     """login and signup page form integrated into single page. All form validation happening in front-end"""
-    pass
+    return render(request, 'login/login-signup.html')
 
 
 # @cache_page(60 * 15)
@@ -28,13 +27,20 @@ def classic_login(request):
         if not data_json:
             return JsonResponse(data={'msg': 'اطلاعاتی دریافت نشد', 'status': 'nok', 'code': 400})
         data = json.loads(data_json)
+        username = data.get('username', None)
+        if not username:
+            return JsonResponse(data={'msg': 'ایمیل دریافت نشد', 'status': 'nok', 'code': 409})
+        password = data.get('password', None)
+        if not password:
+            return JsonResponse(data={'msg': 'رمز عبور دریافت نشد', 'status': 'nok', 'code': 410})
         user = authenticate(request,
-                            username=data['username'],
-                            password=data['password'])
+                            username=username,
+                            password=password)
         if user:
             login(request, user)
+            cart = user.cart_user.first()
             # Synchronize Cart data with cart session data after login
-            # synch_cart_session_cart_after_authentication(Cart, request)
+            cart.sync_session_cart_after_authentication(request)
             return JsonResponse(data={'msg': 'ورود با موفقیت انجام گرفت', 'status': 'ok', 'code': 200})
         else:
             return JsonResponse(data={'msg': 'نام کاربری یا رمز عبور اشتباه است', 'status': 'nok','code': 401})
@@ -58,13 +64,18 @@ def signup(request):
         if not json_data:
             return JsonResponse(data={'msg': 'داده ای دریافت نشد', 'status': 'nok', 'code': 401})
         data = json.loads(json_data)
+        # {'username': email, 'password': password, 'cart-id': cartId, 'gender': gender, 'marketing': allowMarketing, 'personal': allowPersonalData}
+        gender = data.get('gender', None)
+        marketing = data.get('marketing', False)
+        personal = data.get('personal', False)
         new_user = get_user_model().objects.filter(username=data['username'])
         if new_user.exists():
             return JsonResponse(data={'msg': f'کاربر {data["username"]} در حال حاضر وجود دارد', 'status': 'nok', 'code': 400})
-        new_user = get_user_model()(username=data['username'], password=data['password'])
+        new_user = get_user_model().objects.create_user(username=data['username'], password=data['password'], gender=gender, marketing=marketing, personal=personal)
         if user_signup_login(request, new_user):
             # Synchronize Cart data with cart session data after login
-            # synch_cart_session_cart_after_authentication(Cart, request)
+            cart = new_user.cart_user.first()
+            cart.sync_session_cart_after_authentication(request)
             # If user created successfully, direct him/her to his/her newly created profile
             return JsonResponse(data={'msg': f"کاربر جدید ساخته شد", 'status': 'ok', 'code': 201})
         # If there is a problem in 'user_signup_login' (eg: user could not login the website) redirect

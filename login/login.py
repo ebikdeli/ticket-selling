@@ -8,14 +8,15 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
 
-def user_signup_login(request, user):
+def user_signup_login(request:object, user:object) -> bool:
     """
     Login user with session mode after which he/she signup to the website. Note that because we use more
     than one (default) login backend, we must set backend the one we want. If we don't this we receive errors.
     """
     try:
-        user.set_password(user.password)
-        user.save()
+        # ! We already have saved hashed password
+        # user.set_password(user.password)
+        # user.save()
         login(request, user, backend='django.contrib.auth.backends.ModelBackend')
         messages.success(request, _('Welcome to Green Apple'))
         # messages.success(request, _('به وبسایت گرین اپل خوش آمدید'))
