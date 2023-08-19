@@ -1,0 +1,33 @@
+:root {
+    --orange-color: #f27a1a;
+    --border-color: #e6e6e6;
+}
+
+body {
+    background-color: #FAFAFA;
+}
+
+/* * MAIN section */
+
+main{
+    direction: rtl;
+    margin: 30px auto;
+    max-width: 1200px;
+    width: 90%;
+    border: 4px solid #ff6720;
+    border-radius: 16px;
+    padding: 20px;
+    background-color: white;
+}
+
+h3{
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+p{
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/support/about-contact-us.css' %}">
+{% endblock head %}
+
+
+{% block title %}کانال های ارتباطی{% endblock title %}
+
+
+{% block content %}
+<main class="my-3">
+    <!-- * About-us section -->
+    <section class="NHxq6AAY pBYweWxN" id="about-us">
+        <div class="RHUqH0os">
+            <section class="NHxq6AAY pBYweWxN">
+                <h2 class="xTinJN4n">درباره ما</h2>
+            </section>
+        </div>
+        <div class="UMCItFYY">
+            <ul>
+                <li>
+                    <figure>
+                        <img loading="lazy" src="https://cdn.dsmcdn.com/web/corporatepage/tymarketplace.svg">
+                        <figcaption>
+                            <h4>
+                                فروشگاه لاتاری از تریندویل<!-- -->
+                                <span>هر چه را که بخواهید داریم</span>
+                            </h4>
+                        </figcaption>
+                    </figure>
+                    <article>
+                        <h4>
+                            فروشگاه لاتاری از ترندویل<!-- -->
+                            <i class="G7TQ_R06"></i>
+                            <span>هر چه را که بخواهید داریم</span>
+                        </h4>
+                        <p>می توانید از فروشگاه ترندویل هر بلیط لاتاری را که بخواید برایتان فراهم کنیم
+                        </p>
+                    </article>
+                </li>
+            </ul>
+            <ul class="vDmxOy35">
+                <li class="align-items-center">
+                    <img src="https://cdn.dsmcdn.com/web/corporate/business-info-1.svg" alt="Trendyol" class="ms-4">
+                    <p class="m-0">هدف ما این است که به دیگران کمک کنیم
+                        <b>تا بتوانند در شرایط تحریم بانکی، از امکانات ترندویل</b>
+                        استفاده کنند
+                    </p>
+                </li>
+                <li class="align-items-center pb-0">
+                    <img src="https://cdn.dsmcdn.com/web/corporate/business-info-2.svg" alt="Trendyol" class="ms-4">
+                    <p class="m-0">قصد داریم بزرگترین فروشنده آنلاین بلیط های لاتاری ترندیول باشیم</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <!-- * Contact-us section -->
+    <section class="NHxq6AAY mb-5" id="contact-us" style="margin-top: 80px;">
+        <h2 class="xTinJN4n DlJWcqBj">تماس با ما</h2>
+        <div class="UMCItFYY contact-us-box mx-auto">
+            <div>
+                <i class="bi bi-envelope-fill"></i>
+                <p class="m-0">
+                    <bdi>شماره تماس:</bdi>
+                    <span>{{ config.contact }}</span>
+                </p>
+            </div>
+            <div>
+                <i class="bi bi-telephone-fill"></i>
+                <p class="m-0">
+                    <bdi>آدرس ایمیل:</bdi>
+                    <span>{{ config.email }}</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+</main>
+{% endblock content %}
+

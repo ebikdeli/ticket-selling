@@ -255,9 +255,12 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
 
 CONSTANCE_CONFIG = OrderedDict([
+    # Email
     ('email', ('bigshop@gmail.com', 'Main email of the server')),
+    # Contact Number
+    ('contact', ('09124455666', 'Main contact for contact us page')),
     # About us field
-    ('about_us', ('', 'About Us field shown to users in "about us page"')),
+    # ('about_us', ('', 'About Us field shown to users in "about us page"')),
     # Address of the links used in website
     ('instagram', ('', 'Instagram link')),
     ('linkedin', ('', 'Linkedin')),
@@ -267,8 +270,9 @@ CONSTANCE_CONFIG = OrderedDict([
 ])
 
 CONSTANCE_CONFIG_FIELDSETS = {
-    'Email Options': ('email',),
-    'About Us': ('about_us',),
+    'Email': ('email',),
+    'Contact Number': ('contact',),
+    # 'About Us': ('about_us',),
     'Links': {'fields': ['instagram', 'linkedin', 'twitter', 'whatsapp', 'facebook'], 'collapse': True},
 }
 

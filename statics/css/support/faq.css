@@ -1,0 +1,141 @@
+:root {
+    --orange-color: #f27a1a;
+    --border-color: #e6e6e6;
+}
+
+body {
+    background-color: #FAFAFA;
+}
+
+/* * Main section */
+main{
+    width: 90%;
+    padding-top: 0 !important;
+    padding: 20px;
+    margin-bottom: 20px auto;
+    direction: ltr;
+}
+
+.faq-message-form{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+@media screen and (max-width:1250px) {
+    .faq-message-form{
+        flex-direction: column-reverse;
+    }
+    .user-message-form{
+        align-self: center;
+    }
+    .faq-section{
+        align-self: flex-end;
+    }
+}
+
+
+/* User-Message-Form */
+
+.user-message-form{
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: white;
+}
+
+.user-message-form p{
+    text-align: end;
+    font-size: 18px;
+}
+
+@media screen and (max-width: 520px) {
+    main{
+        width: 100%;
+        margin: 10px auto;
+        padding: 25px;
+    }
+    .user-message-form p{
+        font-size: 16px;
+    }
+    label{
+        font-size: 14px;
+    }
+    
+}
+
+.user-message-form input, .user-message-form textarea{
+    background-color: #FAFAFA;
+}
+
+.user-message-form label{
+    display: block;
+    text-align: end;
+}
+
+.error{
+    display: block;
+    color: red;
+    margin: 6px;
+    text-align: end;
+}
+
+
+/* FAQ */
+
+.faq-section h2{
+    font-size: 32px;
+    text-align: end;
+    margin-bottom: 30px;
+}
+
+.faq-box{
+    margin: 20px 0;
+    text-align: end;
+    padding-top: 5px;
+    border: 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.question-answer{
+    display: flex;
+    justify-content: flex-start;
+    align-items: self-end;
+    flex-direction: column;
+    margin: 10px 0;
+    padding: 20px 0;
+    border: 0;
+    border-bottom: 1px solid var(--border-color);
+    gap: 15px;
+}
+
+@media screen and (max-width:520px) {
+    .faq-section h2{
+        font-size: 26px;
+    }
+    .question-answer p{
+        font-size: 16px !important;
+    }
+}
+
+.question{
+    color: blue;
+}
+
+.answer{
+    color: green;
+}
+
+.question-answer p{
+    margin: 0;
+    font-size: 20px;
+}
+
+.question-head{
+    font-weight: 600;
+}
+
+.answer-head{
+    font-weight: 600;
+}

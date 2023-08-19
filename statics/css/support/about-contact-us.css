@@ -1,0 +1,248 @@
+:root {
+    --orange-color: #f27a1a;
+    --border-color: #e6e6e6;
+}
+
+main{
+    direction: rtl;
+}
+
+
+/* * About Us section */
+
+.RIMBcw65 .RHUqH0os {
+    background-color: #fafafa;
+    padding: 40px 0;
+}
+
+.xTinJN4n {
+    font-size: 54px;
+    line-height: 72px;
+    font-weight: 600;
+    color: #1a4955;
+}
+
+.NHxq6AAY {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.UMCItFYY {
+    margin-top: 40px;
+    border: 4px solid #ff6720;
+    border-radius: 16px;
+    padding: 50px 40px;
+    position: relative;
+}
+
+.UMCItFYY ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.UMCItFYY ul li {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
+}
+
+.UMCItFYY ul li figure {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 150px;
+    width: 150px;
+    /* margin: 0 40px 0 0; */
+    margin: 0 0 0 40px;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.UMCItFYY ul li figure img {
+    height: 100%;
+}
+
+.UMCItFYY ul li figure figcaption {
+    display: none;
+}
+
+.UMCItFYY ul li article {
+    width: auto;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+.UMCItFYY ul li article h4 {
+    font-size: 24px;
+    line-height: 24px;
+    font-weight: 600;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.UMCItFYY ul li article h4 .G7TQ_R06 {
+    width: 2px;
+    height: 22px;
+    background-color: #d9d9d9;
+    display: inline-block;
+    margin: 0 12px;
+}
+
+.UMCItFYY ul li article h4 span {
+    color: #ff6720;
+}
+
+.UMCItFYY ul li article p {
+    color: #333;
+    font-size: 18px;
+    line-height: 32px;
+    font-weight: 400;
+}
+
+.vDmxOy35 {
+    margin: 30px 0 32px;
+}
+
+.vDmxOy35 li {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-bottom: 30px;
+}
+
+.vDmxOy35 li img {
+    display: block;
+    height: 72px;
+    width: 72px;
+}
+
+.vDmxOy35 li p {
+    font-size: 18px;
+    line-height: 30px;
+}
+
+
+
+/* * Contact Us section */
+.xTinJN4n.DlJWcqBj {
+    font-size: 48px;
+    line-height: 1;
+}
+
+.DlJWcqBj {
+    margin: 0 auto;
+    text-align: start;
+}
+
+.xTinJN4n {
+    font-size: 48px;
+    line-height: 72px;
+    font-weight: 600;
+    color: #1a4955;
+}
+
+.contact-us-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    width: max-content;
+    gap: 30px;
+    font-size: 22px;
+    color: #333;
+}
+
+.contact-us-box > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.contact-us-box i{
+    color: #ff6720;
+}
+
+.contact-us-box span{
+    font-weight: 600;
+}
+
+
+/* *** TO BE FULLY RESPONSIVE */
+@media screen and (max-width:1200px) {
+    main{
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+@media screen and (max-width:895px) {
+    /* disable little line between h4 tag texts */
+    h4 i{
+        display: none !important;
+    }
+}
+
+@media screen and (max-width:650px) {
+    .UMCItFYY > ul > li{
+        flex-direction: column;
+    }
+    .UMCItFYY > ul > li > figure{
+        margin: 0 !important;
+        margin-bottom: 20px !important;
+    }
+    .vDmxOy35 > li > img{
+        margin: 0 !important;
+        margin-bottom: 20px !important;
+    }
+    h2{
+        font-size: 36px !important;
+    }
+}
+
+@media screen and (max-width:580px) {
+    .UMCItFYY{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .vDmxOy35{
+        margin-bottom: 0 !important;
+        padding-left: 10px;
+        padding-right: 10px;
+        gap: 15px !important;
+    }
+}
+
+@media screen and (max-width:330px) {
+    h2{
+        font-size: 28px !important;
+    }
+    .contact-us-box{
+        align-items: center;
+        width: auto;
+        font-size: 16px;
+    }
+}

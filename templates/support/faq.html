@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/support/faq.css' %}">
+{% endblock head %}
+
+
+{% block title %}سوالات پر تکرار{% endblock title %}
+
+
+{% block content %}
+<main class="mx-auto">
+    <div class="faq-message-form">
+        <!-- user-message Form section -->
+        <section class="user-message-form">
+            <p class="mb-3">لطفا انتقادات و پیشنهادات خود را با ما به اشتراک بگذارید</p>
+            <form action="" method="post" id="um-form">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">ایمیل</label>
+                    <input type="text" class="form-control" id="email" placeholder="">
+                    <small class="error email-error"></small>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">پیام</label>
+                    <textarea class="form-control text-end" id="message" rows="3" style="direction: rtl;"></textarea>
+                    <small class="error message-error"></small>
+                </div>
+                <button type="submit" class="btn btn-primary d-block mt-4 mx-auto">ارسال</button>
+            </form>
+        </section>
+        <!-- FAQ section -->
+        <section class="faq-section">
+            <h2>سوالات پر تکرار</h2>
+            <div class="faq-box">
+
+                <!-- (START) FAQ questions iteratie here -->
+                {% for faq in faqs %}
+                <div class="question-answer">
+                    <p class="question">
+                        <span class="question-head">پرسش:</span> 
+                        <span class="question-text">{{ faq.question }}</span>
+                    </p>
+                    <p class="answer">
+                        <span class="answer-head">پاسخ:</span>
+                        <span class="answer">{{ faq.answer }}</span>
+                    </p>
+                </div>
+                {% endfor %}
+                <!-- (END) FAQ questions iteratie here -->
+
+
+
+            </div>
+        </section>
+    </div>
+</main>
+{% endblock content %}
+
+
+{% block script %}
+<script src="{% static 'js/support/faq.js' %}" type="module"></script>
+{% endblock script %}

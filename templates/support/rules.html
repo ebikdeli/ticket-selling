@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/support/rules.css' %}">
+{% endblock head %}
+
+
+{% block title %}قوانین وبسایت{% endblock title %}
+
+
+{% block content %}
+<main>
+    <h3>قوانین سایت</h3>
+    <!-- every text from server set in the following div -->
+    {% if rule %}
+        <div>
+            {{ rule }}
+        </div>
+    {% else %}
+    <div>
+        <p>1- کاربران فروش بلیط خریداری شده به دیگران را ندارند</p>
+        <p>2- بلیط فروخته شده پس گرفته نمی شود</p>
+    </div>
+    {% endif %}
+</main>
+{% endblock content %}
+
