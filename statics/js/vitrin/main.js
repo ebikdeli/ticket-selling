@@ -1,4 +1,5 @@
 // * When import a module, we should import the script with '.js' extension. JS module rules are weird!
+// ! Another weird thing about js modules is that in our app we must import all the other modules we use in our current module even if we don't use every one of imported modules directly
 import getCookie from '../csrftoken.js';
 import { validateEmail, isNumeric } from '../functions.js';
 import { sendPostData } from '../ajax.js';
