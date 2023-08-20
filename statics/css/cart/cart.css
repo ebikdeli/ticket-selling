@@ -1,0 +1,268 @@
+:root{
+  --orange-color: #f27a1a;
+  --border-color: #e6e6e6;
+}
+
+body{
+  background-color: #FAFAFA;
+}
+
+/* * Main section */
+
+main{
+  min-height: 100vh;
+  background-color: #FAFAFA;
+  direction: rtl;
+}
+
+.empty-cart{
+  width: 90%;
+}
+
+.empty-cart img{
+  max-width: 500px;
+  width: 70%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.cart-fill{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tickets-box{
+  align-self: flex-start;
+}
+
+.tickets-box > p{
+  margin: 0;
+  font-size: 28px;
+  text-align: start;
+}
+
+.error-msg{
+  position: absolute;
+  right: 50%;
+  top: 120px;
+  color: red;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.tickets{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-bottom: 20px;
+  /* border: 0;
+  border-bottom: 1px solid var(--border-color); */
+  gap: 30px;
+}
+
+@media screen and (max-width:472px) {
+  .tickets{
+    align-items: center !important;
+  }
+  .ticket-unit{
+    justify-content: center !important;
+  }
+  .cart-img-specs{
+    justify-content: center !important;
+  }
+  .specs{
+    width: 80% !important;
+  }
+  .order-summary{
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.ticket-unit{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 0;
+  gap: 60px;
+  flex-wrap: wrap;
+  border: 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+@media screen and (max-width:946px) {
+  .ticket-unit{
+    gap: 30px;
+  }
+}
+
+@media screen and (min-width:657px) and (max-width:777px) {
+  .ticket-unit{
+    justify-content: flex-start;
+  }
+}
+
+.cart-img-specs{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.cart-img-specs img{
+  width: 180px;
+  height: 130px;
+  border-radius: 4px;
+}
+
+.cart-img-specs .specs{
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  flex-direction: column;
+  /* background-color: #FAFAFA; */
+  /* background-color: white; */
+  /* background-color: rgb(243, 242, 242); */
+  border-radius: 4px;
+  height: 130px;
+  width: 220px;
+  padding: 5px;
+}
+
+.cart-img-specs .specs div{
+  gap: 20px;
+}
+
+
+.cart-img-specs .specs p{
+  margin: 0;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.cart-img-specs .specs span{
+  flex-grow: 0;
+  font-size: 14px;
+  color: #333333;
+  font-weight: 600;
+}
+
+.price-value{
+  color: var(--orange-color) !important;
+  font-size: 18px !important;
+  font-weight: 600;
+  margin-left: 7px;
+}
+
+.ticket-date{
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.cart-quantity{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.cart-quantity button{
+  border: 1px solid var(--border-color);
+  /* border-radius: 50%; */
+  border-radius: 6px;
+  color: white;
+}
+
+.cart-quantity i{
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cart-quantity input{
+  width: 50px;
+  text-align: center;
+  font-size: 14px;
+  color: #333333;
+}
+
+.price-item span:nth-child(2){
+  font-size: 14px;
+  color: #333333;
+  font-weight: 600;
+}
+
+.cart-remove{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1px;
+  cursor: pointer;
+}
+
+.cart-remove:hover{
+  color: red;
+}
+
+.cart-remove > span{
+  font-size: 14px;
+  color: #333333;
+  font-weight: 600;
+}
+
+.cart-remove > span:hover{
+  color: red;
+}
+
+.cart-remove button{
+  border: 0;
+  width: auto;
+  height: auto;
+  font-size: 20px;
+  background-color: #FAFAFA;
+}
+
+
+.cart-remove button:hover{
+  color: red;
+}
+
+
+.order-summary{
+  width: 350px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.order-summary > p{
+  margin: 0;
+  font-size: 24px;
+}
+
+#total-quantity{
+  font-size: 16px;
+  font-weight: 600;
+}
+
+#total-price{
+  font-size: 20px;
+}
+
+.payment-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; 
+  color: white;
+  background-color: rgb(49, 48, 48);
+  border-radius: 3px;
+  padding: 5px 45px;
+}

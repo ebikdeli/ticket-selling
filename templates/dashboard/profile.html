@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/dashboard/profile.css' %}">
+{% endblock head %}
+
+
+{% block title %}حساب کاربری{% endblock title %}
+
+
+{% block content %}
+<input type="hidden" name="cart-id" class="cart-id" value="{{ cart.id }}">
+
+  <!-- ******* 'content' block in 'base.html' ******* -->
+  <main class="mx-auto col-xxl-5 col-xl-6 col-lg-7 col-md-9 col-11">
+    <!-- cart and orders buttons -->
+    <section class="my-3">
+      <button class="cob btn btn-danger" id="my-orders">سفارشات من</button>
+      <button class="cob btn btn-danger" id="my-cart">سبد خرید</button>
+    </section>
+    <!-- Icon and content section -->
+    <section class="icon-content my-3">
+      <!-- Icon section -->
+      <div class="icons">
+        <i class="bi bi-person-circle  person    active" title="مشخصات کاربر"></i>
+        <i class="bi bi-key  key    " title="تغییر رمز عبور"></i>
+      </div>
+      <!-- content section -->
+      <div class='contents'>
+        <!-- ! Error box -->
+        <div id="error-box-wrapper" class="d-none">
+          <i class="bi bi-exclamation-circle"></i>
+          <span class="message"></span>
+        </div>
+        <!-- User profile edit -->
+        <div class="profile-change-box   ">
+          <form action="" method="post" enctype="multipart/form-data" id="profile-edit-form">
+            {% csrf_token %}
+            <div class="first-last">
+              <div class="d-flex justify-content-center align-items-center flex-column">
+                <label>نام</label>
+                <input class="form-control" type="text" name="first-name" value="{{ request.user.first_name }}">
+              </div>
+              <div class="d-flex justify-content-center align-items-center flex-column">
+                <label>نام خانوادگی</label>
+                <input class="form-control" type="text" name="last-name" value="{{ request.user.last_name }}">
+              </div>
+            </div>
+            <div class="email-phone">
+              <div class="d-flex justify-content-center align-items-center flex-column">
+                <label>ایمیل</label>
+                <input class="form-control" type="text" name="email" value="{{ request.user.email }}" disabled>
+              </div>
+              <div class="d-flex justify-content-center align-items-center flex-column">
+                <label>شماره همراه</label>
+                <input class="form-control" type="text" name="phone" value="{{ request.user.phone }}">
+              </div>
+            </div>
+            <div class="address">
+              <div class="w-100 d-flex justify-content-center align-items-center flex-column">
+                <label for="">آدرس</label>
+                <!-- <input class="form-control" type="text" name="address"> -->
+                <textarea class="form-control" name="address" rows="3" id="">{{ request.user.address }}</textarea>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+              <button class="btn btn-primary" id="profile-edit-button" type="submit" disabled>
+                <span>تایید</span>
+                <i class="bi bi-check-lg"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+        <!-- User change password -->
+        <div class="password-change-box   d-none">
+          <form action="" method="post" enctype="multipart/form-data" id="password-change-form">
+            {% csrf_token %}
+            <div class="password old-password mx-sm-0 mx-auto col-lg-6 col-md-7 col-sm-8 col-11">
+              <label for="">رمز عبور فعلی</label>
+              <div>
+                <i class="bi bi-eye-slash togglePassword" id=""></i>
+                <input class="form-control" type="text" name="password" id="">
+              </div>
+            </div>
+            <div class="new-passwords mx-sm-0 mx-auto col-lg-6 col-md-7 col-sm-8 col-11">
+              <div class="password d-flex justify-content-center align-items-start flex-column w-100">
+                <label>رمز عبور جدید</label>
+                <div class="w-100">
+                  <i class="bi bi-eye-slash togglePassword" id=""></i>
+                  <input class="form-control" type="text" name="password-new">
+                </div>
+              </div>
+              <div class="password d-flex justify-content-center align-items-start flex-column w-100">
+                <label>تکرار رمز عبور جدید</label>
+                <div class="w-100">
+                  <i class="bi bi-eye-slash togglePassword" id=""></i>
+                  <input class="form-control" type="text" name="password-confirm">
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+              <button class="btn btn-primary" id="password-change-button" type="submit">
+                <span>تغییر رمز عبور</span>
+                <i class="bi bi-check-lg"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section >
+
+  </main>
+{% endblock content %}
+
+
+{% block script %}
+<script src="{% static 'js/dashboard/profile.js' %}" type="module"></script>
+{% endblock script %}

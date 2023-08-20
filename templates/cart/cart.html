@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/cart/cart.css' %}">
+{% endblock head %}
+
+
+{% block title %}سبد خرید{% endblock title %}
+
+{% block content %}
+<main>
+  <input type="hidden" name="cart-id" value="{{ cart.id }}">
+  <!-- If cart is empty show following block -->
+  
+  <section class="empty-cart my-4 mx-auto text-center
+  {% if cart.total_quantity %}d-none{% endif %}">
+    <h3 class="my-4">سبد خرید خالی است</h3>
+    <img src="{% static 'image/empty-cart.png' %}" alt="">
+  </section>
+
+  <!-- If cart is not empty -->
+  <section class="cart-fill my-4
+  {% if not cart.total_quantity %}d-none{% endif %}">
+    <div class="tickets-box">
+      <p class="mb-3">سبد خرید</p>
+      <div class="error-msg   d-none">
+        پیام خطا
+      </div>
+      <div class="tickets">
+
+        <!-- (START) tickets come here -->
+        {% for ts in cart.ticketsold_cart.all %}
+        <div class="ticket-unit">
+          <!-- Image and specs -->
+          <div class="cart-img-specs">
+            <div>
+              <img src="{{ ts.ticket.image.url }}" alt="{{ ts.ticket.name }}">
+            </div>
+            <div class="specs">
+              <div class="d-flex justify-content-start align-items-center">
+                <p>نام بلیط:</p>
+                <span class="align-self-start">{{ ts.ticket.name }}</span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <p>قیمت واحد:</p>
+                <div class="align-self-start">
+                  <span class="price-value price-unit">{{ ts.ticket.price }}</span><span style="font-size: 12px; color: #333;">تومان</span>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <p>تاریخ قرعه کشی:</p>
+                <div class="d-flex justify-content-start align-items-center" style="gap: 5px;">
+                  <i class="bi bi-clock"></i>
+                  <span class="ticket-date">{{ ts.ticket.lottery_date|date:"d/m/Y" }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- quantity -->
+          <div class="cart-quantity">
+            <button class="cart-quantity-inc" style="background-color: green;" title="اضافه کردن">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+            <input type="text" class="cart-quantity-number" name="quantity" data-ticket-id="{{ ts.ticket.id }}" value="{{ ts.quantity }}" id="" disabled>
+            <button class="cart-quantity-dec" style="background-color: red;" title="کم کردن">
+              <i class="bi bi-dash-lg"></i>
+            </button>
+          </div>
+          <!-- price -->
+          <div class="price-item">
+            <span class="price-value total-price-unit">{{ ts.total_price }}</span><span>تومان</span>
+          </div>
+          <!-- delete -->
+          <div class="cart-remove" data-ticket-id="111" title="حذف محصول">
+            <span>حذف</span>
+            <button>
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </div>
+        {% endfor %}
+        <!-- (END) tickets come here -->
+
+      </div>
+    </div>
+
+    <div class="order-summary">
+      <p>خلاصه سفارش</p>
+      <div class="my-3 px-2 d-flex justify-content-between align-items-center">
+        <p class="m-0" style="font-size: 20px;">تعداد کل بلیط ها:</p>
+        <div>
+          <span id="total-quantity">{{ cart.total_quantity }}</span>&nbsp;
+          <span style="font-weight: 600;">عدد</span>
+        </div>
+      </div>
+      <div class="mb-2 mt-4 px-2 pt-2 d-flex justify-content-between align-items-center" style="border: 0; border-top: 1px solid #e6e6e6">
+        <p class="m-0" style="font-size: 20px;">قیمت کل:</p>
+        <div>
+          <span id="total-price" class="price-value price-unit">{{ cart.total_price }}</span><span style="font-size: 14px; font-weight: 600; color:#333">تومان</span>
+        </div>
+      </div>
+      <div class="mt-5 mb-2 d-flex justify-content-center align-items-center">
+        <a href="{% url 'order:order' %}" style="text-decoration: none;">
+          <button class="payment-button">
+            <span>ثبت سفارش</span>
+            <i class="bi bi-credit-card-2-back-fill"></i>
+          </button>
+        </a>
+      </div>
+      <div class="mt-4 mb-2 d-flex justify-content-around align-items-center">
+        <img src="{% static 'image/zarring-pal.png' %}" alt="https://zarrin-pal.com">
+        <img src="{% static 'image/Pay.ir-smal.png' %}" alt="https://pay.ir">
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock content %}
+
+
+{% block script %}
+<script src="{% static 'js/cart/cart.js' %}" type="module"></script>
+{% endblock script %}

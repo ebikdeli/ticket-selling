@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+<style>
+  body{
+    background-color: #fafafa;
+    min-height: 100vh;
+  }
+
+  .order--body--box{
+    padding: 20px;
+    border: 1px solid #e6e6e6;;
+    border-radius: 6px;
+    background-color: white;
+  }
+
+  #failed-img{
+    width: 180px;
+    height: auto;
+  }
+  @media screen and (max-width: 800px) {
+    #failed-img{
+      width: 150px;
+    }
+  }
+  @media screen and (max-width: 420px) {
+    #failed-img{
+      width: 120px;
+    }
+  }
+
+  #back--index{
+    border-radius: 4px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font: 600 20px;
+  }
+</style>
+{% endblock head %}
+
+
+{% block title %}پرداخت ناموفق{% endblock title %}
+
+
+{% block content %}
+<input type="hidden" name="cart-id" class="cart-id" value="{{ cart.id }}">
+<main class="mx-auto my-5 col-xl-4 col-lg-5 col-md-7 col-sm-9 col-11" style="font-family: IRANYekan, sans-serif">
+  <div class="order--body--box text-center">
+      <h2 class="display-5 mb-4" style="color: rgb(237, 6, 6);">پرداخت انجام نگرفت</h2>
+      <!-- * Following block will show user the problem with payment -->
+      <h3 class="py-4 h4 text-danger">مشکلی در پرداخت پیش آمده</h3>
+
+      <div class="mx-auto my-4 desktop tablet mobile">
+          <img src="{% static 'image/failure.png' %}" id="failed-img" alt="failed-payment">
+      </div>
+
+      <a href="{% url 'vitrin:index' %}" dideo-checked="true">
+          <button id="back--index" class="no-print mx-auto mt-5 mb-3 btn btn-primary d-flex justify-content-center align-items-center">
+              <ion-icon class="md hydrated" name="return-up-back-outline" role="img" aria-label="return up back outline"></ion-icon>
+              <span>بازگشت به صفحه اصلی</span>
+          </button>
+      </a>
+  </div>
+</main>
+{% endblock content %}

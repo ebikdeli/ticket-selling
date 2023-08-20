@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/payment/payment-success.css' %}">
+{% endblock head %}
+
+
+{% block title %}پرداخت موفق{% endblock title %}
+
+
+{% block content %}
+
+<input type="hidden" name="cart-id" class="cart-id" value="{{ cart.id }}">
+<main class="mx-auto my-5 col-xl-4 col-lg-6 col-md-8 col-sm-9 col-11">
+  <div class="order-body-box text-center">
+    <h2 class="display-6 mb-4" style="color: green;">پرداخت موفقیت آمیز</h2>
+      <div class="no-print mx-auto my-4 desktop tablet mobile">
+        <img src="{% static 'image/success.png' %}" id="success-img" alt="successful payment">
+      </div>
+      <p class="py-2" style="color: #333; font-size: 22px;">از خرید شما سپاسگذاریم</p>
+
+    <div class="order-specs mx-auto my-5">
+      <div class="my-3">
+        <span>شماره سفارش:</span>
+        <span id="order-id">{{ order.order_id }}</span>
+      </div>
+      <div class="my-3">
+        <span>مبلغ پرداخت شده:</span>
+        <div class="d-flex justify-content-center align-items-center" style="gap: 5px;">
+          <span class="price-value" id="total-price">{{ order.total_price }}</span>
+          <span style="font-size: 16px; font-weight: 600;">تومان</span>
+        </div>
+      </div>
+      <div class="my-3">
+        <span>تعداد بلیط خریداری شده:</span>
+        <div class="d-flex justify-content-center align-items-center" style="gap:5px;">
+          <span id="total-quantity">{{ order.total_quantity }}</span>
+          <span style="font-size: 16px; font-weight: 600;">عدد</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ordered Tickets -->
+    <div class="order-items">
+      <p>لیست بلیط های خریداری شده</p>
+      <!-- (START) For loop for ticket name and ticket quantity -->
+      {% for ts in order.ticketsolds.all %}
+      <div class="order-item">
+        <h5>
+          <span>{{ forloop.counter }}</span>
+          <span>.</span>
+        </h5>
+          <div class="order-item-specs">
+            <p>{{ ts.ticket.name }}</p>
+            <div class="flex-wrap" style="gap:15px;">
+              <div>
+                <p class="order-item-quantity">{{ ts.quantity }}</p>
+                <p style="font-size: 14px; font-weight: 600;">عدد</p>
+              </div>
+              <div>
+                <p class="price-value order-item-price">{{ ts.total_price }}</p>
+                <p style="font-size: 14px; font-weight: 600;">تومان</p>
+              </div>
+            </div>
+          </div>
+      </div>
+      {% endfor %}
+      <!-- (END) For loop for ticket name and ticket quantity -->
+  </div>
+
+
+
+    <div class="mt-3 mb-3 text-center d-flex justify-content-around align-items-center flex-wrap"
+    style="gap: 10px;">
+      <a href="{% url 'vitrin:index' %}">
+        <button id="back-index"
+          class="no-print btn btn-primary d-flex justify-content-center align-items-center">
+          <ion-icon name="return-up-back-outline"></ion-icon>
+          <span>بازگشت به صفحه اصلی</span>
+        </button>
+      </a>
+      <button id="print-page"
+        class="no-print btn btn-info d-flex justify-content-center align-items-center"
+        onclick="window.print()">
+        <i class="bi bi-printer"></i>
+        <span>پرینت</span>
+      </button>
+    </div>
+  </div>
+</main>
+{% endblock content %}
+
+
+{% block script %}
+<script src="{% static 'js/payment/payement-success.js' %}" type="module"></script>
+{% endblock script %}

@@ -94,12 +94,19 @@ def password_change(request):
         if not json_data:
             return JsonResponse(data={'msg': 'داده ای دریافت نشد', 'status': 'nok', 'code': 400})
         data = json.loads(json_data)
-        user = authenticate(request, username=request.user.username, password=data['password'])
+        password = data.get('password', None)
+        password_new = data.get('password-new', None)
+        if not password or not password:
+            return JsonResponse(data={'msg': 'رمز عبور دریافت نشده', 'status': 'nok', 'code': 403})
+        user = authenticate(request, username=request.user.username, password=password)
         if not user:
             return JsonResponse(data={'msg': 'رمز عبور اشتباه است', 'status': 'nok', 'code': 402})
         # If current password is valid, change user password with new-password
-        user.password = make_password(data['new-password'])
-        # user.save()
+        user.password = make_password(password_new)
+        user.save()
+        # ? If we don't use "login(request, user)" after changing the password, user logout and see internal error
+        # ! Provide for backen argument when google authentication implemented
+        user = login(request, user)
         return JsonResponse(data={'msg': 'رمز عبور با موفقیت تغییر داده شد', 'status': 'ok', 'code': 200})
     # Any request method except for the 'POST" resulted in following error
     else:
@@ -109,38 +116,22 @@ def password_change(request):
 @login_required
 def edit_profile(request):
     """Edit user profile from dashboard"""
-
     if request.method == 'POST':
         json_data = request.POST.get('data', None)
         if not json_data:
             return JsonResponse(data={'msg': 'داده ای دریافت نشد', 'status': 'nok', 'code': 401})
         data = json.loads(json_data)
-        fields_number = 0
-        # Check if address data changed
-        address = request.user.address_user.first()
-        try:
-            if data['address'] != address.line:
-                address.line = data['address']
-                address.save()
-                fields_number += 1
-                data.pop('address')
-        except KeyError:
-            pass
-        # Check if user data changed
-        user = get_user_model().objects.get(id=request.user.id)
-        # ? Instead fo below for block, we can use this line: "request.user.__dict__.update(**data)"
-        for k, new_value in data.items():
-            for field, old_value in user.__dict__.items():
-                if k == field:
-                    print(field, ' ===> ', old_value)
-                    print(field, ' ===> ', new_value)
-                    fields_number += 1
-                    user.__dict__[field] = new_value
-        if fields_number:
-            user.save()
-            return JsonResponse(data={'msg': 'اطلاعات شما با موفقیت تغییر کرد', 'status': 'ok', 'code': 200})
-        # If there are no fields to change, return below message
-        return JsonResponse(data={'msg': 'فیلدی برای تغییر کردن وجود نداشت', 'status': 'nok', 'code': 402})
+        first_name = data.get('first-name', None)
+        last_name = data.get('last-name', None)
+        phone = data.get('phone', None)
+        address = data.get('address', None)
+        user = request.user
+        user.first_name = first_name
+        user.last_name = last_name
+        user.phone = phone
+        user.address = address
+        user.save()
+        return JsonResponse(data={'msg': 'اطلاعات شما با موفقیت تغییر کرد', 'status': 'ok', 'code': 200})
     # If any method requested except for POST returns following response
     return JsonResponse(data={'msg': 'متد اشتباهی ارسال شده', 'status': 'nok', 'code': 400})
 

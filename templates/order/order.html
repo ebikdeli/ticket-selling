@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/order/order.css' %}">
+{% endblock head %}
+
+
+{% block title %}سفارش{% endblock title %}
+
+
+{% block content %}
+
+
+<!-- ******* 'content' block in 'base.html' ******* -->
+<main class="my-5">
+    <input type="hidden" name="cart-id" value="{{ cart.id }}">
+    {% if not order.total_quantity %}
+    <h3 class='my-3 text-center'>سفارش فعالی ثبت نشده</h3>
+
+    {% else %}
+    
+    <section class="order-box mx-auto col-xl-3 col-lg-4 col-md-6 col-sm-9 col-11">
+        <h2 class="text-center mb-4">سفارش</h2>
+        <div id="title-separator"></div>
+        <p class="mt-3 mb-2" style="font-size: 20px;">بلیط های اتخاب شده:</p>
+        <div class="d-flex justify-content-center flex-column">
+
+            <!-- (START) For loop for ticket name and ticket quantity -->
+            {% for ts in order.ticketsolds.all %}
+            <div class="order-item my-2 d-flex justify-content-between align-items-center">
+                <div>
+                    <span>{{ forloop.counter }}.</span>&nbsp;
+                    <p>{{ ts.ticket.name }}</p>
+                </div>
+                <div>
+                    <p class="order-item-quantity">{{ ts.quantity }}</p>
+                    <p style="font-size: 14px;">عدد</p>
+                </div>
+            </div>
+            {% endfor %}
+            <!-- (END) For loop for ticket name and ticket quantity -->
+
+        </div>
+        <!-- total-quantity & total-price -->
+        <div class="total-quantity-price">
+            <div class="d-flex justify-content-between align-items-center">
+                <p>تعداد کل بلیط ها:</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <p id="total-quantity">{{ order.total_quantity }}</p>&nbsp;&nbsp;
+                    <p style="font-size: 14px; font-weight:600">عدد</p>
+                </div>
+
+            </div>
+            <div class="my-2 d-flex justify-content-between align-items-center">
+                <p>مبلغ قابل پرداخت:</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <p id="total-price">{{ order.total_price }}</p>&nbsp;&nbsp;
+                    <p style="font-size: 12px; font-weight:600">تومان</p>
+                </div>
+            </div>
+        </div>
+        {% comment %} ! PAYMENT LINK {% endcomment %}
+        <a href="#" style='text-decoration: none; '>
+            <div class="payment-button-box">
+                <button class="btn btn-dark payment-button">
+                    <span>پرداخت</span>
+                    <i class="bi bi-credit-card"></i>
+                </button>
+            </div>
+        </a>
+        <div class="my-4 d-flex justify-content-center align-items-center">
+            <a href="{% url 'cart:cart-view' %}">
+                <button class="btn btn-warning">
+                    <span>بازگشت به سبد خرید</span>
+                    <i class="bi bi-cart"></i>
+                </button>
+            </a>
+        </div>
+    </section>
+    {% endif %}
+</main>
+{% endblock content %}
+
+
+{% block script %}
+<script src="{% static 'js/order/order.js' %}" type="module"></script>
+{% endblock script %}

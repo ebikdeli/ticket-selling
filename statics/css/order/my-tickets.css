@@ -1,0 +1,381 @@
+:root{
+    --orange-color: #f27a1a;
+    --border-color: #e6e6e6;
+    --text-color: #333;
+}
+
+body{
+    background-color: #fafafa;
+}
+
+/* * Main section */
+main{
+    width: 95%;
+    direction: rtl;
+    min-height: 100vh;
+}
+
+.ticket-title{
+    direction: rtl;
+    margin: 20px 20px 20px 0;
+    font-size: 24px;
+    color: #333;
+
+}
+
+.my-ticket-list{
+    display: flex;
+    /* justify-content: center; */
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+@media screen and (max-width:816px) {
+    main{
+        text-align: center;
+    }
+
+    .my-ticket-list{
+        justify-content: center;
+    }
+}
+
+
+
+/* * Ticket body */
+.ticket{
+    width: 370px;
+    height: auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid rgb(238, 238, 238);
+}
+
+.status{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.status p{
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.status-loss{
+    background-color: #FFC0C7;
+    color: rgb(177, 3, 3);
+}
+
+.status-win{
+    background-color: #D9ECE1;
+    color: green;
+}
+
+.status-draw{
+    background-color: rgb(213, 211, 211);
+    color: grey;
+}
+
+
+.name{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+@media screen and (max-width:400px) {
+    .name{
+        gap: 15px;
+    }
+}
+
+.name > p{
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    width: 130px;
+}
+
+.name > div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: steelblue;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 25px;
+}
+
+.name .name-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    color: steelblue;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+}
+
+.name-icon > i{
+    padding-top: 2px;
+}
+
+.image-price{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* flex-wrap: wrap; */
+    gap: 10px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+@media screen and (max-width:400px) {
+    .image-price{
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+}
+
+.image-price > div > img{
+    width: 150px;
+    height: 100px;
+}
+
+.price-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 4px;
+    background-color: #fafafa;
+    color: #333;
+    padding: 6px 10px;
+    gap: 6px;
+}
+
+.price-box p{
+    margin: 0;
+}
+
+.price-box .total-price{
+    margin-top: 5px;
+    padding-top: 5px;
+    border: 0;
+    border-top: 1px solid rgb(238, 238, 238);
+}
+
+.price-box .total-price span{
+    color: #ff6720;
+}
+
+.date-detail{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    color: #ff6720;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.date-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    background-color: #ffe0d1;
+    padding: 2px 7px 2px 7px;
+    border-radius: 25px;
+}
+
+.detail-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 7px 2px 7px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.detail-box > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.detail-box > div > i{
+    background-color: #ff6720;
+    color: white;
+    border-radius: 50%;
+    height: 22px;
+    width: 18px;
+    padding-right: 1px;
+}
+
+.ticket-condition{
+    margin-top: 10px;
+}
+
+.ticket-condition a{
+    color: #333;
+}
+
+
+
+/* * Ticket Pop Up */
+.ticket-popup-box{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background-color: rgba(0,0,0,.4);
+}
+.ticket-popup{
+    position: absolute;
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid rgb(213, 211, 211);
+    width: 370px;
+    bottom: 2px;
+    left: 50%;
+    right: 50%;
+    transform: translate(50%, -10%);
+}
+
+.ticket-popup .close-button{
+    position: absolute;
+    left: 6px;
+    top: 7px;
+    border: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+.close-button > span{
+    font-size: 32px;
+}
+
+.ticket-popup > div > p{
+    text-align: center;
+    margin: 0 !important;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgb(213, 211, 211);
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.ticket-popup > p{
+    text-align: center;
+    margin: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.ticket-popup .status{
+    margin-bottom: 20px;
+}
+
+.ticket-popup .ticket-number{
+    width: max-content;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border: 2px solid rgb(177, 3, 3);
+    background-color: #FFC0C7;
+    border-radius: 8px;
+    padding: 5px 15px;
+    font-size: 20px;
+    font-weight: 500;
+    gap: 20px;
+    color: rgb(177, 3, 3);
+    margin-bottom: 30px;
+}
+
+.ticket-popup .ticket-number i{
+    cursor: pointer;
+    padding: 5px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.ticket-popup .ticket-color{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+}
+
+.ticket-color p{
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    background-color: white;
+}
+
+.color-cube{
+    width: 12px;
+    height: 12px;
+}
+
+.green{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    color: rgb(7, 166, 7);
+}
+
+.green .color-cube{
+    background-color: rgb(7, 166, 7);
+}
+
+.red{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    color: rgb(177, 3, 3);
+}
+
+.red .color-cube{
+    background-color: rgb(177, 3, 3);
+}
+
+.grey{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    color: grey;
+}
+
+.grey .color-cube{
+    background-color: grey;
+}

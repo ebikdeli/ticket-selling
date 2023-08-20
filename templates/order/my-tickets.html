@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/order/my-tickets.css' %}">
+{% endblock head %}
+
+
+{% block title %}محصولات خریداری شده{% endblock title %}
+
+
+{% block content %}
+<main class="mx-auto">
+
+  {% if not bought_ticketsolds %}
+  <h2 class="text-center my-5">بلیطی خریداری نشده</h2>
+  <h5 class='text-center my-4'><a href="{% url 'vitrin:index' %}" style="text-decoration: none; text-color: #333;">بازگشت به صفحه اصلی</a></h5>
+
+  {% else %}
+  <div class="ticket-title">
+      <p>لیست بلیط های من</p>
+  </div>
+  <section class="my-ticket-list my-3">
+
+      <!-- Each ticket (START) -->
+      {% for ts in bought_ticketsolds %}
+      <div class="ticket" data-ticket-id="{{ ts.ticket.id}}">
+          <!-- ticket status -->
+          {% if ts.status == 'lose' %}
+          <div class="status status-loss">
+              <p class="m-0">متاسفانه شما برنده نشدید</p>
+              <span>&#x1F61E;</span>
+          </div>
+          {% endif %}
+
+          {% if ts.status == 'win' %}
+          <div class="status status-win">
+              <p class="m-0">تبریک، شما برنده شدید</p>
+              <span>&#x1F603;</span>
+          </div>
+          {% endif %}
+
+          {% if ts.status == 'pending' %}
+          <div class="status status-draw">
+              <p class="m-0">قرعه کشی انجام نشده</p>
+              <span>&#x1F642;</span>
+          </div>
+          {% endif %}
+          <!--ticket name -->
+          <div class="name">
+              <p class="text-end">{{ ts.ticket.name }}</p>
+              <!-- This div changed with result of lottery -->
+              {% if ts.ticket.is_ended %}
+              <div>
+                  <span class="name-icon">
+                    <i class="bi bi-check2"></i>
+                  </span>
+                  <span class="text-end" style="font-size: 14px;">قرعه کشی به اتمام رسیده</span>
+              </div>
+              {% else %}
+              <div>
+                <span class="name-icon">
+                  <i class="bi bi-arrow-right-short"></i>
+                </span>
+                <span class="text-end" style="font-size: 14px;">قرعه کشی انجام نشده</span>
+              </div>
+              {% endif %}
+          </div>
+          <!-- ticket image-price -->
+          <div class="image-price">
+            <div>
+              <img src="{{ ts.ticket.image.url }}" alt="{{ ts.ticket.name }}">
+            </div>
+            <div class="price-box">
+              <div class="d-flex justify-content-between align-items-center w-100">
+                <p>قیمت واحد:</p>
+                <p>
+                  <span class="price-value">{{ ts.ticket.price }}</span>&nbsp;<span style="font-size: 12px;">تومان</span>
+                </p>
+              </div>
+              <div class="d-flex justify-content-between align-items-center w-100">
+                <p>تعداد:</p>
+                <p>
+                  <span>{{ ts.quantity }}</span>&nbsp;<span style="font-size: 12px;">عدد</span>
+                </p>
+              </div>
+              <div class="d-flex justify-content-between align-items-center w-100">
+                <p>شماره بلیط:</p>
+                <p>{{ ts.ticket.ticket_number }}</p>
+              </div>
+              <div class="total-price d-flex justify-content-between align-items-center w-100">
+                <p>قیمت کل:</p>
+                <p>
+                  <span class="price-value">{{ ts.total_price }}</span>&nbsp;<span style="font-size: 12px;">تومان</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- ticket date and detail -->
+          <div class="date-detail">
+            <div class="date-box">
+              <i class="bi bi-clock"></i>
+              <div class="d-flex justify-content-center align-items-center" style="gap: 3px;">
+                <span>تاریخ قرعه کشی</span>
+                <span>{{ ts.ticket.lottery_date|date:"d.m.Y" }}</span>
+              </div>
+            </div>
+            <div class="detail-box">
+              <span>جزئیات بلیط</span>
+              <div>
+                <i class="bi bi-chevron-left"></i>
+              </div>
+            </div>
+          </div>
+          <!-- ticket condition -->
+
+          <!-- <div class="ticket-condition">
+            <p class="p-0">
+              <a href="#">شرایط معامله</a>
+            </p>
+          </div> -->
+      </div>
+      <!-- Each ticket (END) -->
+
+      <!-- Each Ticket Pop Up (start) -->
+      <div class="ticket-popup-box   d-none" data-ticket-id="{{ts.ticket.id}}">
+        <div class="ticket-popup">
+          <div>
+            <p>جزئیات بلیط</p>
+            <button type="button" class="close close-button" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <p>{{ ts.ticket.name }}</p>
+          {% comment %} popup ticketsold status {% endcomment %}
+          {% if ts.status == 'lose' %}
+          <div class="status status-loss">
+              <p class="m-0">متاسفانه شما برنده نشدید</p>
+              <span>&#x1F61E;</span>
+          </div>
+          {% endif %}
+
+          {% if ts.status == 'win' %}
+          <div class="status status-win">
+              <p class="m-0">تبریک، شما برنده شدید</p>
+              <span>&#x1F603;</span>
+          </div>
+          {% endif %}
+
+          {% if ts.status == 'pending' %}
+          <div class="status status-draw">
+              <p class="m-0">قرعه کشی انجام نشده</p>
+              <span>&#x1F642;</span>
+          </div>
+          {% endif %}
+
+          <div class="ticket-number">
+            <div class="d-flex justify-content-center align-items-center">
+              <p class="m-0">شماره بلیط:</p>&nbsp;<span class="code">{{ ts.ticket.ticket_number }}</span>
+            </div>
+            <i class="fa fa-copy"></i>
+          </div>
+          <div class="ticket-color">
+            <div class="green">
+              <span class="color-cube"></span>
+              <p>برنده</p>
+            </div>
+            <div class="red">
+              <span class="color-cube"></span>
+              <p>بازنده</p>
+            </div>
+            <div class="grey">
+              <span class="color-cube"></span>
+              <p>ادامه دارد</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      <!-- Each Ticket Pop Up (END) -->
+
+  </section>
+  {% endif %}
+</main>
+{% endblock content %}
+
+
+{% block script %}
+<script src="{% static 'js/order/my-tickets.js' %}" type="module"></script>
+{% endblock script %}

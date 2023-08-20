@@ -1,0 +1,254 @@
+:root {
+    --orange-color: #f27a1a;
+    --border-color: #e6e6e6;
+    --text-color: #333;
+    --change-width: 550px;
+}
+
+body {
+    background-color: #fafafa;
+    min-height: 100vh;
+}
+
+/* * Main section */
+main{
+    direction: rtl;
+}
+
+main > section:first-of-type{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 600px) {
+    main > section:first-of-type{
+        justify-content: center;
+    }
+}
+
+.cob{
+    background-color: #f27a1a;
+    font-size: 17px;
+    /* width: 100px; */
+}
+
+
+/* * Icons section */
+
+.icon-content{
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
+    justify-content: space-between;
+    gap: 20px;
+    border-radius: 6px;
+}
+
+@media screen and (max-width: 600px) {
+    .icon-content{
+        flex-direction: column;
+        position: sticky;
+        top: 3px;
+        /* align-items: center; */
+        align-items: stretch;
+    }
+}
+
+.icons{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 200px;
+    width: auto;
+    background-color: white;
+    border-radius: 6px;
+    padding: 5px 4px;
+}
+
+
+@media screen and (max-width: 600px) {
+    .icons{
+        flex-direction: row;
+        /* justify-content: space-between; */
+        align-items: center;
+        width: 240px;
+        height: auto;
+        padding: 0px 5px;
+        margin: auto;
+    }
+}
+
+.icons i{
+    color: rgb(170, 97, 45);
+    font-size: 26px;
+    cursor: pointer;
+}
+
+.icons i.active{
+    color: #f27a1a;
+    text-shadow: 0 0 5px #FFF, 0 0 5px #FFF, 0 0 5px #FFF, 0 0 5px #f27a1a, 0 0 5px #f27a1a, 0 0 5px #f27a1a, 0 0 5px #f27a1a, 0 0 5px #f27a1a;
+    font-size: 28px;
+}
+
+
+.contents{
+    background-color: white;
+    border-radius: 4px;
+    padding: 20px;
+    flex-grow: 99;
+}
+
+
+/* ! Error section */
+#error-box-wrapper {
+    direction: rtl;
+    color: #d0021b;
+    line-height: 15px;
+    padding: 14px 20px 13px;
+    /* margin-bottom: 15px; */
+    margin: 30px auto;
+    display: flex;
+    align-items: center;
+    border: 1px solid;
+    border-radius: 3px;
+    background-color: #fff4f6;
+}
+
+#error-box-wrapper .message {
+    font-size: 12px;
+    padding-left: 7px;
+    padding-right: 7px;
+    font-weight: 600;
+    display: table-cell;
+    vertical-align: middle;
+    line-height: 12px;
+}
+
+#error-box-wrapper .message span{
+    display: block;
+    padding: 5px 3px;
+}
+
+
+/* * Profile-change-box */
+.profile-change-box p{
+    margin: 0;
+}
+
+.profile-change-box label{
+    align-self: flex-start;
+    margin-right: 4px;
+    /* font-weight: 600; */
+    font-size: 18px;
+    color: #616060;
+}
+
+.profile-change-box input{
+    font-size: 16px;
+}
+
+.first-last{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.first-last > div{
+    gap: 5px;
+}
+
+.email-phone{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.email-phone > div{
+    gap: 5px;
+}
+
+.email-phone input{
+    direction: ltr;
+}
+
+.address{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+#profile-edit-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    /* background-color: #C70039; */
+    /* color: #333; */
+    font-size: 18px;
+    border-radius: 4px;
+    padding: 5px 30px;
+}
+
+
+/* * password change box */
+.old-password{
+    display: flex;
+    justify-content: center;
+    align-items: self-start;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.old-password div{
+    margin-top: -25px;
+    width: 100%;
+}
+
+.togglePassword {
+    display: inline;
+    position: relative;
+    cursor: pointer;
+    left: -10px;
+    top: 35px;
+    z-index: 10;
+}
+
+.old-password input{
+    direction: ltr;
+    padding-right: 30px;
+}
+
+.new-passwords{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 18px;
+    margin-bottom: 35px;
+}
+
+.new-passwords > div > div{
+    margin-top: -20px;
+}
+
+.new-passwords input{
+    direction: ltr;
+    padding-right: 30px;
+}

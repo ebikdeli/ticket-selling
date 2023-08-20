@@ -1,0 +1,79 @@
+:root{
+    --orange-color: #f27a1a;
+    --border-color: #e6e6e6;
+}
+
+body{
+    background-color: #FAFAFA;
+}
+
+
+/* * Main section */
+
+main{
+    min-height: 100vh;
+    background-color: #FAFAFA;
+    direction: rtl;
+}
+
+.order-box{
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    color: #333333;
+}
+
+#title-separator{
+    border: 0;
+    border-top: 1px solid var(--border-color);
+    margin-top: 2px;
+    margin-bottom: 2px;
+    height: 2px;
+}
+
+.order-item p{
+    display: inline;
+    font-size: 16px;
+    /* font-weight: 600; */
+    margin: 0;
+}
+
+.order-item-quantity{
+    font-size: 20px !important;
+}
+
+.total-quantity-price{
+    margin-top: 20px;
+    padding-top: 15px;
+    border: 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.total-quantity-price p{
+    margin: 0;
+    font-size: 18px;
+}
+
+#total-quantity , #total-price{
+    color: #f27a1a;
+    font-size: 20px;
+}
+
+.payment-button-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.payment-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    padding: 5px 45px;
+    /* background-color: #333333; */
+    border-radius: 5px !important;
+}

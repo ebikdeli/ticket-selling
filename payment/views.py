@@ -1,9 +1,28 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.http import JsonResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 from order.models import Order
+
+
+
+@login_required
+def payment_success(request):
+    """Redirect user to this page if payment was successful"""
+    latest_order_qs = Order.objects.filter(user=request.user, is_paid=True)
+    if latest_order_qs.exists():
+        latest_order = latest_order_qs.first()
+    else:
+        return redirect(reverse('vitrin:index'))
+    return render(request, 'payment/payment-success.html', {'order': latest_order})
+
+
+@login_required
+def payment_failed(request):
+    """Redirect user to this page if payment was a failure"""
+    return render(request, 'payment/payment-failed.html')
 
 
 @login_required

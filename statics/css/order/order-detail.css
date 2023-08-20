@@ -1,0 +1,175 @@
+:root {
+    --orange-color: #f27a1a;
+    --border-color: #e6e6e6;
+    --text-color: #333;
+}
+
+body {
+    background-color: #fafafa;
+}
+
+/* * Main section */
+main {
+    direction: rtl;
+    min-height: 100vh;
+    color: #333;
+    background-color: white;
+    padding: 20px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color)
+}
+
+#success-img {
+    width: 180px;
+    height: auto;
+}
+
+@media screen and (max-width: 800px) {
+    #success-img {
+        width: 150px;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    #success-img {
+        width: 120px;
+    }
+}
+
+.order-specs{
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    flex-direction: column;
+    /* border: 1px solid var(--border-color); */
+    border-radius: 4px;
+    background-color: #fafafa;
+    padding: 20px;
+    width: max-content;
+}
+
+.order-specs > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.order-specs > div > span{
+    font-size: 20px;
+}
+
+.order-specs > div > span:nth-of-type(2){
+    font-weight: 600;
+}
+
+#order-id{
+    color: #f27a1a;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#total-price{
+    color: #f27a1a;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#total-quantity{
+    color: #f27a1a;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.order-items{
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    flex-direction: column;
+    /* gap: 15px; */
+    padding: 20px;
+    border: 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.order-item{
+    text-align: start;
+    margin-bottom: 10px;
+    padding: 15px;
+    padding-top: 5px;
+    border: 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.order-item-specs{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.order-item-specs div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.order-item > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.order-items > p{
+    margin-bottom: 20px;
+    font-size: 18px;
+    text-align: start;
+}
+
+.order-item p{
+    display: inline;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.order-item-quantity{
+    font-size: 18px !important;
+    color: #f27a1a;
+}
+
+.order-item-price{
+    font-size: 18px !important;
+    color: #f27a1a;
+}
+
+
+#back-index{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+    gap: 6px;
+    font-size: 18px !important;
+    border-radius: 4px !important;
+}
+
+#print-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    flex-direction: row-reverse;
+    font-size: 18px !important;
+    border-radius: 4px !important;
+    color: white;
+}
+
+/* * This is used when print the page */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+}

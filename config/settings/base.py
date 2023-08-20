@@ -183,8 +183,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-LOGIN_REDIRECT_URL = 'virtin:index'
-LOGIN_URL = 'login:signup'
+LOGIN_REDIRECT_URL = 'dashboard:profile'
+LOGIN_URL = 'login:login-signup'
 
 LOGOUT_REDIRECT_URL = 'vitrin:index'
 

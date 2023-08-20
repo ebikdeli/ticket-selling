@@ -12,6 +12,7 @@ class Rule(models.Model):
     class Meta:
         verbose_name = 'Rule'
         verbose_name_plural = 'Rule'
+        ordering = ['-updated']
 
     def __str__(self) -> str:
         return f'rule({self.id})'
@@ -26,6 +27,7 @@ class Faq(models.Model):
     class Meta:
         verbose_name = 'Faq'
         verbose_name_plural = 'Faq'
+        ordering = ['-updated']
     
     def __str__(self) -> str:
         return f'question({self.id})'
@@ -42,6 +44,7 @@ class UserMessage(models.Model):
     class Meta:
         verbose_name = 'UserMessage'
         verbose_name_plural = 'UserMessage'
+        ordering = ['-updated']
     
     def __str__(self) -> str:
         return f'user_message({self.id})'

@@ -19,6 +19,7 @@ class Ticket(models.Model):
     discount =  models.DecimalField(verbose_name=_('discount'), decimal_places=0, max_digits=10, default=0)
     number_sold = models.PositiveIntegerField(verbose_name=_('number_sold'), default=0)
     is_active = models.BooleanField(verbose_name=_('is_active'), default=True)
+    is_ended = models.BooleanField(verbose_name=_('is_ended'), default=False)
     image = models.ImageField(verbose_name=_('image'), upload_to=ticket_image_path, blank=True, null=True)
     lottery_date = models.DateTimeField(verbose_name=_('lottery date'))
     content = models.TextField(verbose_name=_('content'), blank=True)
@@ -40,6 +41,11 @@ class Ticket(models.Model):
 
 
 class TicketSold(models.Model):
+    RESULT_CHOICES = [
+        ('win', 'win'),
+        ('pending', 'pending'),
+        ('lose', 'lose')
+    ]
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              verbose_name=_('user'),
                              related_name='ticketsold_user',
@@ -57,6 +63,7 @@ class TicketSold(models.Model):
                              on_delete=models.CASCADE)
     ticket_code = models.CharField(verbose_name=_('ticket_code'), max_length=10, blank=True)
     quantity = models.PositiveIntegerField(verbose_name=_('quantity'), default=1)
+    status = models.CharField(verbose_name=_('status'), max_length=10, choices=RESULT_CHOICES, default='pending')
     is_paid = models.BooleanField(verbose_name=_('is_paid'), default=True)
     is_active = models.BooleanField(verbose_name=_('is_active'), default=True)
     slug = models.SlugField(blank=True)

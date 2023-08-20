@@ -86,6 +86,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     gender = models.CharField(verbose_name=_('gender'), max_length=6, blank=True, null=True, choices=[('M', 'M'), ('F', 'F')])
     marketing = models.BooleanField(verbose_name=_('marketing'), default=False)
     personal = models.BooleanField(verbose_name=_('personal'), default=False)
+    address = models.TextField(verbose_name=_('address'), blank=True)
     score = models.IntegerField(verbose_name=_('user score'), default=0)
     score_lifetime = models.IntegerField(verbose_name=_('user score'), default=0)
     discount_value = models.DecimalField(verbose_name=_('user discount(value)'), default=0, max_digits=9,
