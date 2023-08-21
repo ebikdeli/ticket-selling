@@ -25,23 +25,22 @@
 
       <!-- Each ticket (START) -->
       {% for ts in bought_ticketsolds %}
-      <div class="ticket" data-ticket-id="{{ ts.ticket.id}}">
+      {% comment %} Because 'ticket.id' is not unique identifier in this page, we have used 'ticketsold-id' instead{% endcomment %}
+      <div class="ticket" data-ticketsold-id="{{ ts.id}}">
           <!-- ticket status -->
           {% if ts.status == 'lose' %}
           <div class="status status-loss">
               <p class="m-0">متاسفانه شما برنده نشدید</p>
               <span>&#x1F61E;</span>
           </div>
-          {% endif %}
 
-          {% if ts.status == 'win' %}
+          {% elif ts.status == 'win' %}
           <div class="status status-win">
               <p class="m-0">تبریک، شما برنده شدید</p>
               <span>&#x1F603;</span>
           </div>
-          {% endif %}
 
-          {% if ts.status == 'pending' %}
+          {% elif ts.status == 'pending' %}
           <div class="status status-draw">
               <p class="m-0">قرعه کشی انجام نشده</p>
               <span>&#x1F642;</span>
@@ -124,7 +123,7 @@
       <!-- Each ticket (END) -->
 
       <!-- Each Ticket Pop Up (start) -->
-      <div class="ticket-popup-box   d-none" data-ticket-id="{{ts.ticket.id}}">
+      <div class="ticket-popup-box   d-none" data-ticketsold-id="{{ts.id}}">
         <div class="ticket-popup">
           <div>
             <p>جزئیات بلیط</p>
@@ -139,16 +138,14 @@
               <p class="m-0">متاسفانه شما برنده نشدید</p>
               <span>&#x1F61E;</span>
           </div>
-          {% endif %}
 
-          {% if ts.status == 'win' %}
+          {% elif ts.status == 'win' %}
           <div class="status status-win">
               <p class="m-0">تبریک، شما برنده شدید</p>
               <span>&#x1F603;</span>
           </div>
-          {% endif %}
 
-          {% if ts.status == 'pending' %}
+          {% elif ts.status == 'pending' %}
           <div class="status status-draw">
               <p class="m-0">قرعه کشی انجام نشده</p>
               <span>&#x1F642;</span>

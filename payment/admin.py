@@ -4,4 +4,4 @@ from .models import Payment
 
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['payment_id', 'user', 'order', 'price', 'pgi', 'is_paid']

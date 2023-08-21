@@ -17,6 +17,11 @@ class Order(models.Model):
                             verbose_name=_('cart'),
                             on_delete=models.CASCADE,
                             related_name='order_cart')
+    ticket = models.ManyToManyField('ticket.Ticket',
+                                    verbose_name=_('ticket'),
+                                    related_name='order_ticket',
+                                    blank=True,
+                                    null=True)
     discounts = models.DecimalField(verbose_name=_('discounts'), max_digits=10, decimal_places=0, default=0)
     is_paid = models.BooleanField(verbose_name=_('is_paid'), default=False)
     is_active = models.BooleanField(verbose_name=_('is_active'), default=True)
@@ -43,25 +48,27 @@ class Order(models.Model):
     
     @property
     def price(self):
-        """Get order price from the cart"""
-        return self.cart.price
+        """Calculate price of the current order"""
+        price = 0
+        if self.ticketsold_order.exists():
+            for ticketsold in self.ticketsold_order.all():
+                price += ticketsold.price
+        return price
     
     @property
     def total_price(self):
-        """Get total-price from the current cart"""
-        return int(self.cart.total_price - self.discounts)
+        """Calculate total_price of the current order"""
+        total_price = 0
+        if self.ticketsold_order.exists():
+            for ticketsold in self.ticketsold_order.all():
+                total_price += ticketsold.total_price
+        return total_price
     
     @property
     def total_quantity(self):
-        """Get quantity of the current order"""
-        return self.cart.total_quantity
-    
-    @property
-    def tickets(self):
-        """Get all tickets for the current Cart"""
-        return self.cart.tickets.all()
-    
-    @property
-    def ticketsolds(self):
-        """Get all ticketsolds for the current Cart"""
-        return self.cart.ticketsold_cart.all()
+        """Calculate total_quantity in the current order"""
+        total_quantity = 0
+        if self.ticketsold_order.exists():
+            for ticketsold in self.ticketsold_order.all():
+                total_quantity += ticketsold.quantity
+        return total_quantity

@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 from ticket.models import Ticket
 from cart.models import Cart
 

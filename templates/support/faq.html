@@ -41,11 +41,11 @@
                 <div class="question-answer">
                     <p class="question">
                         <span class="question-head">پرسش:</span> 
-                        <span class="question-text">{{ faq.question }}</span>
+                        <span class="question-text">{{ faq.question|safe }}</span>
                     </p>
                     <p class="answer">
                         <span class="answer-head">پاسخ:</span>
-                        <span class="answer">{{ faq.answer }}</span>
+                        <span class="answer">{{ faq.answer|safe }}</span>
                     </p>
                 </div>
                 {% endfor %}

@@ -101,7 +101,9 @@ main{
 .question-answer{
     display: flex;
     justify-content: flex-start;
-    align-items: self-end;
+    align-items: self-start;
+    text-align: start;
+    direction: rtl;
     flex-direction: column;
     margin: 10px 0;
     padding: 20px 0;

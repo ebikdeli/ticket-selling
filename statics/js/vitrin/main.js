@@ -728,7 +728,7 @@ const ChangeOrderBelitQuantity = (inputElem) => {
 // *** Belit Order Button click redirection (INSTEAD OF DISABLED POP UP SECTION)
 const belitOrderButton = document.querySelector('.belit-order-payment-button');
 belitOrderButton.addEventListener('click', e=>{
-    let orderUrl = `${location.protocol}//${location.host}/order.html`;
+    let orderUrl = `${location.protocol}//${location.host}/order/`;
     if(location.pathname.includes('front-ticket-selling')){
         orderUrl = `${location.protocol}//${location.host}/front-ticket-selling/order.html`;
     }

@@ -20,7 +20,9 @@ class Cart(models.Model):
     session_key = models.CharField(verbose_name=_('session key'), blank=True, max_length=30)
     ticket = models.ManyToManyField('ticket.Ticket',
                                      verbose_name=_('ticket'),
-                                     related_name='cart_tickets')
+                                     related_name='cart_tickets',
+                                     blank=True,
+                                     null=True)
     is_paid = models.BooleanField(verbose_name=_('is paid'), default=False)
     is_active = models.BooleanField(verbose_name=_('is active'), default=True)
     slug = models.SlugField(blank=True)
@@ -134,8 +136,8 @@ class Cart(models.Model):
         set_session_cart(request, ticketsold.cart)
         return True
     
-    def clean(self, request):
-        """Clean current Cart totally"""
+    def clear(self, request):
+        """clear current Cart totally"""
         if self.ticketsold_cart.exists():
             for ticketsold in self.ticketsold_cart.all():
                 # Remove related ticket from cart.ticket field

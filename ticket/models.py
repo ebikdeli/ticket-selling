@@ -1,8 +1,11 @@
+from typing import Any
 from django.db import models
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.utils.text import slugify
 from _resources.func import get_random_string
+from sorl.thumbnail import ImageField
+
 
 
 def ticket_image_path(instance, filename):
@@ -20,7 +23,8 @@ class Ticket(models.Model):
     number_sold = models.PositiveIntegerField(verbose_name=_('number_sold'), default=0)
     is_active = models.BooleanField(verbose_name=_('is_active'), default=True)
     is_ended = models.BooleanField(verbose_name=_('is_ended'), default=False)
-    image = models.ImageField(verbose_name=_('image'), upload_to=ticket_image_path, blank=True, null=True)
+    image = ImageField(verbose_name=_('image'), upload_to=ticket_image_path, blank=True, null=True)
+    # image = models.ImageField(verbose_name=_('image'), upload_to=ticket_image_path, blank=True, null=True)
     lottery_date = models.DateTimeField(verbose_name=_('lottery date'))
     content = models.TextField(verbose_name=_('content'), blank=True)
     slug = models.SlugField(blank=True)
@@ -60,11 +64,19 @@ class TicketSold(models.Model):
     cart = models.ForeignKey('cart.Cart',
                              verbose_name=_('cart'),
                              related_name='ticketsold_cart',
-                             on_delete=models.CASCADE)
+                             on_delete=models.CASCADE,
+                             blank=True,
+                             null=True)
+    order = models.ForeignKey('order.Order',
+                              verbose_name=_('order'),
+                              related_name='ticketsold_order',
+                              on_delete=models.SET_NULL,
+                              blank=True,
+                              null=True)
     ticket_code = models.CharField(verbose_name=_('ticket_code'), max_length=10, blank=True)
     quantity = models.PositiveIntegerField(verbose_name=_('quantity'), default=1)
     status = models.CharField(verbose_name=_('status'), max_length=10, choices=RESULT_CHOICES, default='pending')
-    is_paid = models.BooleanField(verbose_name=_('is_paid'), default=True)
+    is_paid = models.BooleanField(verbose_name=_('is_paid'), default=False)
     is_active = models.BooleanField(verbose_name=_('is_active'), default=True)
     slug = models.SlugField(blank=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('created'))
@@ -85,6 +97,9 @@ class TicketSold(models.Model):
             self.slug = slugify(f'{self.user.username}_{self.ticket.name}')
         else:
             self.slug = slugify(f'{self.ticket.name}')
+        if not self.is_paid:
+            if self.cart.is_paid:
+                self.is_paid = True
         return super().save(*args, **kwargs)
     
     @property

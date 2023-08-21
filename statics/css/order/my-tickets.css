@@ -139,7 +139,7 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
-    /* flex-wrap: wrap; */
+    flex-wrap: wrap;
     gap: 10px;
     margin-top: 25px;
     margin-bottom: 25px;
@@ -152,9 +152,9 @@ main{
     }
 }
 
-.image-price > div > img{
-    width: 150px;
-    height: 100px;
+.image-price > div > img {
+    width: 190px;
+    height: 115px;
 }
 
 .price-box{

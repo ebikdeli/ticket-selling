@@ -28,6 +28,7 @@ class Payment(models.Model):
     price = models.DecimalField(verbose_name=_('price'), max_digits=10, decimal_places=0)
     describtion = models.TextField(verbose_name=_('describtion'), blank=True)
     pgi = models.CharField(verbose_name=_('gateway interface (pgi)'), choices=PGI_CHOICES, max_length=20)
+    is_paid = models.BooleanField(verbose_name=_('is_paid'), default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     

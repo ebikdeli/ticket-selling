@@ -17,7 +17,7 @@ Array.from(tickets).forEach(ticket => {
     ticket.addEventListener('click', e => {
         if(e.target.closest('.detail-box')){
             Array.from(ticketsPopup).forEach(ticketPopup => {
-                if(ticketPopup.getAttribute('data-ticket-id') == ticket.getAttribute('data-ticket-id')){
+                if(ticketPopup.getAttribute('data-ticketsold-id') == ticket.getAttribute('data-ticketsold-id')){
                     ticketPopup.classList.remove('d-none');
                 }
             })

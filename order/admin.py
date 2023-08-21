@@ -4,4 +4,4 @@ from .models import Order
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['order_id', 'user', 'cart', 'total_price', 'total_quantity', 'is_paid', 'is_active']

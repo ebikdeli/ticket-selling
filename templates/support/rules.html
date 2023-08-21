@@ -15,8 +15,8 @@
     <h3>قوانین سایت</h3>
     <!-- every text from server set in the following div -->
     {% if rule %}
-        <div>
-            {{ rule }}
+        <div style='direction: rtl; text-align: start;'>
+            {{ rule.rule|safe }}
         </div>
     {% else %}
     <div>

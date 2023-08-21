@@ -1,11 +1,13 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from ckeditor.fields import RichTextField
 
 
 
 class Rule(models.Model):
     """It has a container that contains a text field with all the rules in one field"""
-    rule = models.TextField(verbose_name=_('rules'))
+    # rule = models.TextField(verbose_name=_('rules'))
+    rule = RichTextField(verbose_name=_('rules'))
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     
@@ -19,8 +21,10 @@ class Rule(models.Model):
 
 class Faq(models.Model):
     """Every frequently asked question have a question and answer in it"""
-    question = models.TextField(verbose_name=_('question'))
-    answer = models.TextField(verbose_name=_('answer'))
+    # question = models.TextField(verbose_name=_('question'))
+    question = RichTextField(verbose_name=_('question'))
+    # answer = models.TextField(verbose_name=_('answer'))
+    answer = RichTextField(verbose_name=_('answer'))
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     

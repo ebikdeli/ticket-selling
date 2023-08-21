@@ -181,7 +181,7 @@ def clean_cart(request):
         if not cart_qs.exists():
             return JsonResponse(data={'msg': 'سبد خرید انتخاب شده فاقد اعتبار است', 'code': 402, 'status': 'nok'})
         cart = cart_qs.get()
-        result = cart.clean(request)
+        result = cart.clear(request)
         if not result:
             return JsonResponse(data={'msg': 'مشکلی پیش آمده و سبد خرید خالی نشد', 'code': 402, 'status': 'nok'})
         # If cart successfully cleaned, notify the customer

@@ -15,6 +15,13 @@ def order(request):
     for order in order_qs:
         order.delete()
     order = cart.order_cart.create(user=request.user)
+    # After creation of order, put all the ticketsolds of the cart into the order ...
+    for ts in cart.ticketsold_cart.all():
+        ts.order = order
+        ts.save()
+    # And put all tickets of the cart into the order
+    for ticket in cart.ticket.all():
+        order.ticket.add(ticket)
     context = {'order': order}
     return render(request, 'order/order.html', context)
 
@@ -38,7 +45,7 @@ def my_tickets(request):
     orders = Order.objects.filter(user=request.user, is_paid=True)
     if orders.exists():
         for order in orders:
-            for ts in order.tickets:
+            for ts in order.ticketsold_order.all():
                 bought_ticketsolds.append(ts)
     context = {'bought_ticketsolds': bought_ticketsolds}
     return render(request, 'order/my-tickets.html', context)

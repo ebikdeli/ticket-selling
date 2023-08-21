@@ -13,7 +13,7 @@ class UserAdmin(AdminImageMixin, BaseUserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         ('Personal info', {'fields': ('email', 'phone', 'first_name', 'last_name')}),
-        ('Scores', {'fields': ('score', 'score_lifetime', 'discount_value', 'discount_percent')}),
+        # ('Scores', {'fields': ('score', 'score_lifetime', 'discount_value', 'discount_percent')}),
         ('Permissions', {'fields': ('is_admin',)}),
         ('Pictures', {'fields': ('picture',)}),
     )
