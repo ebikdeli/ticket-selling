@@ -9,7 +9,7 @@ body {
 
 /* * MAIN section */
 
-main{
+main > div{
     direction: rtl;
     margin: 30px auto;
     max-width: 1200px;

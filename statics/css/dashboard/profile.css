@@ -35,6 +35,33 @@ main > section:first-of-type{
     /* width: 100px; */
 }
 
+.logout-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-end;
+    margin-right: auto;
+    font-size: 26px;
+    padding: 10px;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    color: #f27a1a;
+    border: 1px solid var(--border-color);
+    background-color: white;
+    cursor: pointer;
+}
+
+.logout-button:hover{
+    color: #d0021b;
+}
+
+@media screen and (max-width:340px) {
+    .logout-button{
+        margin-right: 0px;
+    }
+}
+
 
 /* * Icons section */
 

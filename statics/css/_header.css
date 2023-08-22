@@ -49,11 +49,12 @@ header{
 
 
 .header-icons {
+    direction: rtl;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 20px;
     font-size: 18px;
     padding: 10px 15px;
     border: 0;

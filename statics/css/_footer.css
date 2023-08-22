@@ -1,0 +1,23 @@
+footer{
+    position: relative;
+    background-color: rgb(223, 222, 222);
+    opacity: .8;
+    color: rgb(64, 64, 64);
+    font-size: 12px;
+    text-align: center;
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+    width: 50%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 25px;
+}
+
+@media screen and (max-width:600px) {
+    footer{
+        margin-top: 200px;
+        width: 90%;
+    }
+}

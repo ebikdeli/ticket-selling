@@ -19,12 +19,15 @@
     <section class="my-3">
       <button class="cob btn btn-danger" id="my-orders">سفارشات من</button>
       <button class="cob btn btn-danger" id="my-cart">سبد خرید</button>
+      <a href="{% url 'login:logout' %}" class='logout-button' title='خروج از حساب کاربری'>
+        <i class="bi bi-door-open"></i>
+      </a>
     </section>
     <!-- Icon and content section -->
     <section class="icon-content my-3">
       <!-- Icon section -->
       <div class="icons">
-        <i class="bi bi-person-circle  person    active" title="مشخصات کاربر"></i>
+        <i class="bi bi-person-circle  person    active" title="مشخصات کاربر" ></i>
         <i class="bi bi-key  key    " title="تغییر رمز عبور"></i>
       </div>
       <!-- content section -->

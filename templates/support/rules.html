@@ -12,18 +12,20 @@
 
 {% block content %}
 <main>
-    <h3>قوانین سایت</h3>
-    <!-- every text from server set in the following div -->
-    {% if rule %}
-        <div style='direction: rtl; text-align: start;'>
-            {{ rule.rule|safe }}
-        </div>
-    {% else %}
     <div>
-        <p>1- کاربران فروش بلیط خریداری شده به دیگران را ندارند</p>
-        <p>2- بلیط فروخته شده پس گرفته نمی شود</p>
+        <h3>قوانین سایت</h3>
+        <!-- every text from server set in the following div -->
+        {% if rule %}
+            <div style='direction: rtl; text-align: start;'>
+                {{ rule.rule|safe }}
+            </div>
+        {% else %}
+        <div>
+            <p>1- کاربران فروش بلیط خریداری شده به دیگران را ندارند</p>
+            <p>2- بلیط فروخته شده پس گرفته نمی شود</p>
+        </div>
+        {% endif %}
     </div>
-    {% endif %}
 </main>
 {% endblock content %}
 
