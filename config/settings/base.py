@@ -68,7 +68,7 @@ MIDDLEWARE = [
     
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "django_minify_html.middleware.MinifyHtmlMiddleware",
+    "django_minify_html.middleware.MinifyHtmlMiddleware",   # To enable django_minify_html to load pages much faster
     'cart.custom_middleware.InitialSessionMiddleware',      # Customized middleware to check sessions
 ]
 
