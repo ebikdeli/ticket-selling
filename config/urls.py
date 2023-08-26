@@ -7,7 +7,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),     # Enable 'ckeditor' editor
-    path('__debug__/', include('debug_toolbar.urls')),    # Enable 'django-debug-toolbar'
+    # path('__debug__/', include('debug_toolbar.urls')),    # Enable 'django-debug-toolbar'
     # path('silk/', include('silk.urls', namespace='silk')),    # Enable 'django-silk'
     path('watchman/', include('watchman.urls')),    # Enable 'django-watchman'
     path('api-auth/', include('rest_framework.urls')),    # ...defined as 'accounts' subdirectory in 'hosts.py' module
