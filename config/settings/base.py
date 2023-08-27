@@ -123,7 +123,7 @@ DATABASES = {
         'USER': 'dornikas_admin',
         'PASSWORD': 'dornikashop1379',
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '3306',
     }
 }
 
