@@ -8,7 +8,8 @@ from decouple import config
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
-SECRET_KEY = config('SECRET_KEY')
+# SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = 'django-insecure-$tar!c%%wuxjdp#+1@=^o92vdunseb=%dvq6c(=f3%2sm4rr%a'
 
 
 INSTALLED_APPS = [
@@ -101,12 +102,28 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    #     'OPTIONS': {
+    #         'timeout': 20,
+    #                 }
+    # }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': config('MYSQL_DB'),
+    #     'USER': config('MYSQL_USER'),
+    #     'PASSWORD': config('MYSQL_PASSWORD'),
+    #     'HOST': 'localhost',
+    #     'PORT': '',
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'OPTIONS': {
-            'timeout': 20,
-                    }
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dornikas_db',
+        'USER': 'dornikas_admin',
+        'PASSWORD': 'dornikashop1379',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -297,8 +314,8 @@ INTERNAL_IPS = [
 
 
 # gmail config
-EMAIL_HOST = config('EMAIL_HOST')
-EMAIL_HOST_PORT = config('EMAIL_HOST_PORT')
-EMAIL_USE_TLS = config('EMAIL_USE_TLS')
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+# EMAIL_HOST = config('EMAIL_HOST')
+# EMAIL_HOST_PORT = config('EMAIL_HOST_PORT')
+# EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+# EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
