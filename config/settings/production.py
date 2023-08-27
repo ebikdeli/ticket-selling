@@ -3,7 +3,7 @@ from .base import *
 DEBUG = False
 
 # https://docs.djangoproject.com/en/4.0/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['localhost', '.localhost', '127.0.0.1', 'dornikas.shop', 'https://dornikash.shop']   # WILL CHANGE
+ALLOWED_HOSTS = ['localhost', '.localhost', '127.0.0.1', 'dornika.shop', 'dornikas.shop', 'https://dornikash.shop']   # WILL CHANGE
 # In production if server returns error '400 BAD REQUEST' it means 'ALLOWED_HOSTS' is not
 # set correctly
 
