@@ -185,9 +185,9 @@ THOUSAND_SEPARATOR = ','
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 # To deploy on Host (Sub folders do not accepted by host!):
-# STATIC_ROOT = '/home/<serivce_name>/public_html/static'
+STATIC_ROOT = '/home/dornikas/public_html/static'
 
 STATICFILES_DIRS = [
     BASE_DIR,
@@ -196,9 +196,9 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # To deploy on Host:
-# MEDIA_ROOT = '/home/<serivce_name>/public_html/media'
+MEDIA_ROOT = '/home/dornikas/public_html/media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
