@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     # To be able to use database for 'constance'
     'constance.backends.database',
     'watchman',
-    "django_minify_html",
+    # "django_minify_html",
 
     
     # APPs in django
@@ -69,7 +69,7 @@ MIDDLEWARE = [
     
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "django_minify_html.middleware.MinifyHtmlMiddleware",   # To enable django_minify_html to load pages much faster
+    # "django_minify_html.middleware.MinifyHtmlMiddleware",   # To enable django_minify_html to load pages much faster
     'cart.custom_middleware.InitialSessionMiddleware',      # Customized middleware to check sessions
 ]
 
