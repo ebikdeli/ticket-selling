@@ -23,7 +23,7 @@ INSTALLED_APPS = [
     'django_extensions',
 
     'rest_framework',
-    "debug_toolbar",
+    # "debug_toolbar",
     'django_filters',
     'taggit',
     'django_countries',
@@ -276,7 +276,7 @@ CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
 
 CONSTANCE_CONFIG = OrderedDict([
     # Email
-    ('email', ('bigshop@gmail.com', 'Main email of the server')),
+    ('email', ('admin@dornikas.shop', 'Main email of the server')),
     # Contact Number
     ('contact', ('09124455666', 'Main contact for contact us page')),
     # About us field
