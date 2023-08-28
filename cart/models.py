@@ -17,7 +17,7 @@ class Cart(models.Model):
                              related_name='cart_user',
                              blank=True,
                              null=True)
-    session_key = models.CharField(verbose_name=_('session key'), blank=True, max_length=30)
+    session_key = models.CharField(verbose_name=_('session key'), blank=True, max_length=50)
     ticket = models.ManyToManyField('ticket.Ticket',
                                      verbose_name=_('ticket'),
                                      related_name='cart_tickets',
