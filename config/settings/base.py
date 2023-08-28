@@ -322,10 +322,16 @@ INTERNAL_IPS = [
 
 
 
-EMAIL_HOST = 'mail.dornika.shop'
-EMAIL_PORT = 465
-# EMAIL_PORT = 25
+# EMAIL_HOST = 'mail.dornika.shop'
+# EMAIL_PORT = 465
+# EMAIL_USE_TLS = True
+# EMAIL_USE_SSL = False
+# EMAIL_HOST_USER = 'admin@dornika.shop'
+# EMAIL_HOST_PASSWORD = 'dornikashop_admin'
+
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
-EMAIL_HOST_USER = 'admin@dornika.shop'
-EMAIL_HOST_PASSWORD = 'dornikashop_admin'
+EMAIL_HOST_USER = 'ebikdeli@gmail.com'
+EMAIL_HOST_PASSWORD = 'azgddaqanfmwfmpa'
