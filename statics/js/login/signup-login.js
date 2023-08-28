@@ -226,7 +226,7 @@ signUpForm.addEventListener('submit', function(e){
                 })
             }
             else{
-                location.replace(`${location.protocol}//${location.host}/dashboad`);
+                location.replace(`${location.protocol}//${location.host}/dashboard`);
             }
         })
         .catch(error => {
