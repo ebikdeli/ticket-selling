@@ -18,3 +18,8 @@ def index(request):
     ticketsolds = cart.ticketsold_cart.all()
     context = {'tickets': tickets, 'ticketsolds': ticketsolds}
     return render(request, 'vitrin/index.html', context)
+
+
+def enamad_identifier(request):
+    """Enamad identifier"""
+    return render(request, 'vitrin/enamad-identifier.html')
