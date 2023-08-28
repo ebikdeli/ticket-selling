@@ -319,3 +319,12 @@ INTERNAL_IPS = [
 # EMAIL_USE_TLS = config('EMAIL_USE_TLS')
 # EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 # EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
+
+
+EMAIL_HOST = 'mail.dornika.shop'
+EMAIL_HOST_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'admin@dornika.shop'
+EMAIL_HOST_PASSWORD = 'dornikashop_admin'
