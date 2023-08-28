@@ -7,8 +7,7 @@ ALLOWED_HOSTS = ['localhost', '.localhost', '127.0.0.1', 'dornika.shop', 'dornik
 # In production if server returns error '400 BAD REQUEST' it means 'ALLOWED_HOSTS' is not
 # set correctly
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Security srttings (These are should be True in production)
 SESSION_COOKIE_SECURE = True
