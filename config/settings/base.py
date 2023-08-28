@@ -323,7 +323,7 @@ INTERNAL_IPS = [
 
 
 EMAIL_HOST = 'mail.dornika.shop'
-EMAIL_HOST_PORT = 465
+EMAIL_PORT = 465
 EMAIL_USE_TLS = True
 # EMAIL_USE_SSL = True
 EMAIL_HOST_USER = 'admin@dornika.shop'
