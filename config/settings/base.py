@@ -11,7 +11,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 # SECRET_KEY = config('SECRET_KEY')
 SECRET_KEY = 'django-insecure-$tar!c%%wuxjdp#+1@=^o92vdunseb=%dvq6c(=f3%2sm4rr%a'
 
-SITE_ID = 5
+SITE_ID = 1
 
 INSTALLED_APPS = [
     'django.contrib.admin',
