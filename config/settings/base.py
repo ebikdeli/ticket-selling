@@ -11,7 +11,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 # SECRET_KEY = config('SECRET_KEY')
 SECRET_KEY = 'django-insecure-$tar!c%%wuxjdp#+1@=^o92vdunseb=%dvq6c(=f3%2sm4rr%a'
 
-SITE_ID = 1
+SITE_ID = 2
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     'django_extensions',
 
@@ -40,14 +41,6 @@ INSTALLED_APPS = [
     'watchman',
     # "django_minify_html",
     
-    # allauth apps
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
-
-    'django_rename_app',
-    
     # APPs in django
     'users',
     'login',
@@ -58,6 +51,12 @@ INSTALLED_APPS = [
     'ticket',
     'support',
     'dashboard',
+    
+    # allauth apps
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 
@@ -132,33 +131,6 @@ DATABASES = {
         'PASSWORD': 'dornikashop1379',
         'HOST': 'localhost',
         'PORT': '3306',
-    }
-}
-
-
-# AUTHENTICATION_BACKENDS
-
-AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
-    'django.contrib.auth.backends.ModelBackend',
-    # `allauth` specific authentication methods, such as login by email
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
-
-
-# Social login settings
-
-SOCIALACCOUNT_LOGIN_ON_GET=True
-
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        }
     }
 }
 
@@ -368,3 +340,31 @@ EMAIL_HOST_PASSWORD = 'dornikashop'
 
 # EMAIL_HOST_USER = 'dornikas@dornika.shop'
 # EMAIL_HOST_PASSWORD = 'dornikashop1379'
+
+
+
+# AUTHENTICATION_BACKENDS
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+
+# Social login settings
+
+SOCIALACCOUNT_LOGIN_ON_GET=True
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}

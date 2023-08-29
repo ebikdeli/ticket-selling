@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-{% load static %}
 {% load socialaccount %}
+{% load static %}
 
 
 {% block head %}
@@ -132,8 +132,8 @@
       </div>
       <!-- Social media accounts buttons -->
       {% comment %} ! SOCIAL AUTHENTICATION TO COME HERE {% endcomment %}
+      <a href="{% provider_login_url 'google' %}?next=/" style="text-decoration: none; color: #333;">
       <div class="social-account-login-buttons">
-        <a href="#">
         <div class="btn q-layout social-login-button flex flex-1">
           <div class="social-login-icon" style="background-color: rgb(241, 66, 54);"><i class="bi bi-google"
               style="font-size: larger;"></i></div>
@@ -144,8 +144,8 @@
             </div>
           </div>
         </div>
-        </a>
       </div>
+      </a>
       {% comment %} ! SOCIAL AUTHENTICATION TO COME HERE {% endcomment %}
       <div class="guest-user-track-orders">قوانین و مقررات سایت را&nbsp;
         <a href="{% url 'support:rule' %}" class="clickable-text">در اینجا</a>&nbsp;
