@@ -132,7 +132,7 @@
       </div>
       <!-- Social media accounts buttons -->
       {% comment %} ! SOCIAL AUTHENTICATION TO COME HERE {% endcomment %}
-      <a href="{% provider_login_url 'google' %}?next=/" style="text-decoration: none; color: #333;">
+      <a href="{% provider_login_url 'google' %}?next={% url 'dashboard:profile' %}" style="text-decoration: none; color: #333;">
       <div class="social-account-login-buttons">
         <div class="btn q-layout social-login-button flex flex-1">
           <div class="social-login-icon" style="background-color: rgb(241, 66, 54);"><i class="bi bi-google"
