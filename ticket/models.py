@@ -45,6 +45,7 @@ class Ticket(models.Model):
 
 
 class TicketSold(models.Model):
+    """Represents every ticket sold"""
     RESULT_CHOICES = [
         ('win', 'win'),
         ('pending', 'pending'),
@@ -78,7 +79,7 @@ class TicketSold(models.Model):
     status = models.CharField(verbose_name=_('status'), max_length=10, choices=RESULT_CHOICES, default='pending')
     is_paid = models.BooleanField(verbose_name=_('is_paid'), default=False)
     is_active = models.BooleanField(verbose_name=_('is_active'), default=True)
-    slug = models.SlugField(blank=True)
+    slug = models.SlugField(blank=True, verbose_name=_('slug'))
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('created'))
     updated = models.DateTimeField(auto_now=True, verbose_name=_('updated'))
     
