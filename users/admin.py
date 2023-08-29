@@ -4,7 +4,6 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from sorl.thumbnail.admin import AdminImageMixin
 
 from .models import User
-from .models import Address
 
 
 class UserAdmin(AdminImageMixin, BaseUserAdmin):
@@ -23,7 +22,6 @@ class UserAdmin(AdminImageMixin, BaseUserAdmin):
 
 
 admin.site.register(User, UserAdmin)
-admin.site.register(Address)
 # If we don't unregister 'Group' we will get some Error if we want to reregister it with 'Permission'
 admin.site.unregister(Group)
 admin.site.register([Group, Permission])

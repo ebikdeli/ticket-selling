@@ -53,24 +53,4 @@ class Migration(migrations.Migration):
                 'verbose_name_plural': 'User',
             },
         ),
-        migrations.CreateModel(
-            name='Address',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('state', models.CharField(blank=True, max_length=50, verbose_name='province, state or municipality')),
-                ('city', models.CharField(blank=True, max_length=50, verbose_name='city')),
-                ('line', models.TextField(blank=True, verbose_name='line')),
-                ('code', models.CharField(blank=True, max_length=3, validators=[django.core.validators.MaxLengthValidator(4, 'phone code cannot be longer than 4 chars'), django.core.validators.MinLengthValidator(2, 'phone code cannot be shorter than 2 chars')], verbose_name='phone code')),
-                ('phone', models.CharField(blank=True, max_length=13, validators=[django.core.validators.MaxLengthValidator(9, 'phone cannot be longer than 9 chars'), django.core.validators.MinLengthValidator(7, 'phone cannot be shorter than 7 chars')], verbose_name='phone number')),
-                ('postal', models.CharField(blank=True, max_length=10, verbose_name='postal')),
-                ('created', models.DateTimeField(auto_now_add=True, verbose_name='created')),
-                ('updated', models.DateTimeField(auto_now=True, verbose_name='updated')),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='address_user', to=settings.AUTH_USER_MODEL, verbose_name='user')),
-            ],
-            options={
-                'verbose_name': 'Address',
-                'verbose_name_plural': 'Address',
-                'ordering': ('-updated',),
-            },
-        ),
     ]

@@ -5,9 +5,6 @@ from django.dispatch import receiver
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.utils.text import slugify
-from django.db import IntegrityError
-# from rest_framework.authtoken.models import Token
-from .models import Address
 
 import decimal
 import re
@@ -40,14 +37,6 @@ def fill_slug_field(sender, instance, **kwargs):
         instance.slug = slugify(instance.username)
 
 
-# This signal will used for 'DRF based authentication':
-# @receiver(post_save, sender=settings.AUTH_USER_MODEL)
-# def create_auth_token(sender, instance=None, created=False, **kwargs):
-#     Create Authentication token for newly created user
-#     if created:
-#         Token.objects.create(user=instance)
-
-
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def fill_phone_email_on_username(sender, instance=None, created=False, **kwargs):
     """If username is based on phone or email, fill another field accordingly"""
@@ -68,13 +57,6 @@ def set_if_social_login_field(sender, instance=None, created=False, **kwargs):
     if created and not instance.password:
         instance.is_social_login = True
         instance.user_db_backend = 'social'
-
-
-@receiver(post_save, sender=settings.AUTH_USER_MODEL)
-def create_address_after_user_created(sender, instance=None, created=False, **kwargs):
-    """Create Address model after user signup and created"""
-    if created:
-        Address.objects.create(user=instance)
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)

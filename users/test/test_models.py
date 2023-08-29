@@ -6,8 +6,6 @@ from django.test import TestCase, Client
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 
-from account.models import Address
-
 
 User = get_user_model()
 
@@ -115,30 +113,3 @@ class TestClient(TestCase):
 
         self.assertEqual(user_is_login, True)
         self.assertEqual(request.status_code, 200)
-
-
-class TestUserAddress(TestCase):
-    def setUp(self) -> None:
-        data = {'username': 'ehsan', 'password': '123456'}
-        self.user = get_user_model().objects.create_superuser(**data)
-    
-    def test_if_address_created_after_user(self):
-        """Test if address created automatically after user"""
-        self.assertIn(self.user.address_user, Address.objects.all())
-
-    def test_create_delete_address(self):
-        """Test if Address created and deleted successfully"""
-        # First deleted address created automatically
-        self.assertIn(self.user.address_user, Address.objects.all())
-        self.user.address_user.delete()
-        self.assertNotIn(self.user.address_user, Address.objects.all())
-
-        # Now create a new address for the user
-        address_data = {'user': self.user, 'state': 'Khoozestan', 'city': 'Ahwaz', 'line': 'Bahonar'}
-        # Create Address
-        address = Address.objects.create(**address_data)
-        self.assertEqual(address.state, 'Khoozestan')
-
-        # Delete Address
-        Address.objects.filter(user=self.user).delete()
-        self.assertIsNone(Address.objects.filter(state='Khoozestan').first())

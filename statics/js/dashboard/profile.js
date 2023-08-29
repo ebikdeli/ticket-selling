@@ -21,7 +21,7 @@ export function parseToNumber(str) {
 // *** Redirect with buttons to 'orders' and 'cart' url
 document.querySelector('#my-orders').addEventListener('click', e => {
     // Must get changed for backend purpose
-    let orderUrl = `${location.protocol}//${location.host}/order.html`;
+    let orderUrl = `${location.protocol}//${location.host}/order/`;
     // To support page load on github
     if(location.pathname.includes('front-ticket-selling')){
         orderUrl = `${location.protocol}//${location.host}/front-ticket-selling/order.html`;
@@ -30,7 +30,7 @@ document.querySelector('#my-orders').addEventListener('click', e => {
 })
 document.querySelector('#my-cart').addEventListener('click', e => {
     // Must get changed for backend purpose
-    let cartUrl = `${location.protocol}//${location.host}/cart.html`;
+    let cartUrl = `${location.protocol}//${location.host}/cart/`;
     // To support page load on github
     if(location.pathname.includes('front-ticket-selling')){
         cartUrl = `${location.protocol}//${location.host}/front-ticket-selling/cart.html`;
