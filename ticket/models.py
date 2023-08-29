@@ -18,7 +18,7 @@ class Ticket(models.Model):
     # 'ticket_number' filled by the admin after admin bought the real ticket from Trendyol
     ticket_number = models.CharField(verbose_name=_('ticket_number'), max_length=20, blank=True, unique=True)
     price = models.DecimalField(verbose_name=_('price'), decimal_places=0, max_digits=10)
-    prize_value = models.DecimalField(verbose_name=_('prize_value'), decimal_places=0, max_digits=12, default=5000000)
+    prize_value = models.DecimalField(verbose_name=_('prize_value'), decimal_places=0, max_digits=12, default=1000000)
     discount =  models.DecimalField(verbose_name=_('discount'), decimal_places=0, max_digits=10, default=0)
     number_sold = models.PositiveIntegerField(verbose_name=_('number_sold'), default=0)
     is_active = models.BooleanField(verbose_name=_('is_active'), default=True)
