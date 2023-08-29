@@ -132,8 +132,8 @@
       </div>
       <!-- Social media accounts buttons -->
       {% comment %} ! SOCIAL AUTHENTICATION TO COME HERE {% endcomment %}
+      {% comment %} ? Remember that in global variable "LOGIN_REDIRECT_URL" redirect users to arbitrary profile and we don't need to append something else to "{% provider_login_url 'google' %}" {% endcomment %}
       <a href="{% provider_login_url 'google' %}" style="text-decoration: none; color: #333;">
-      {% comment %} <a href="{% provider_login_url 'google' %}" style="text-decoration: none; color: #333;"> {% endcomment %}
       <div class="social-account-login-buttons">
         <div class="btn q-layout social-login-button flex flex-1">
           <div class="social-login-icon" style="background-color: rgb(241, 66, 54);"><i class="bi bi-google"
