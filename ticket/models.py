@@ -13,7 +13,7 @@ def ticket_image_path(instance, filename):
 
 
 class Ticket(models.Model):
-    """Model for Ticket"""
+    """Model for Ticket. It is the core model that represents tickets"""
     name = models.CharField(verbose_name=_('name'), max_length=50, unique=True)
     # 'ticket_number' filled by the admin after admin bought the real ticket from Trendyol
     ticket_number = models.CharField(verbose_name=_('ticket_number'), max_length=20, blank=True)
