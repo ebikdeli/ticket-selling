@@ -22,4 +22,4 @@ def index(request):
 
 def enamad_identifier(request):
     """Enamad identifier"""
-    return render(request, 'vitrin/enamad-identifier.html')
+    return render(request, 'vitrin/992180.text')
