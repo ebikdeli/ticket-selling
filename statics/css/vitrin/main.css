@@ -461,7 +461,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 /* How to fix not showing dots in the text overflow for custom font */
 /* ??? https://stackoverflow.com/questions/28587045/text-overflow-ellipsis-not-showing-with-some-custom-font */
 .belit-orders-name::after{
-    content: "...";
+    /* content: "..."; */
     position: absolute;
     right: 0;
     top: 0;
