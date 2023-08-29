@@ -355,8 +355,9 @@ AUTHENTICATION_BACKENDS = [
 
 # Social login settings
 
-SOCIALACCOUNT_LOGIN_ON_GET=True
-
+# SOCIALACCOUNT_LOGIN_ON_GET = True
+# ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': [
@@ -365,6 +366,7 @@ SOCIALACCOUNT_PROVIDERS = {
         ],
         'AUTH_PARAMS': {
             'access_type': 'online',
+            'prompt': 'select_account',
         }
     }
 }
