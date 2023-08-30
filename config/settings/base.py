@@ -8,8 +8,7 @@ from decouple import config
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
-# SECRET_KEY = config('SECRET_KEY')
-SECRET_KEY = 'django-insecure-$tar!c%%wuxjdp#+1@=^o92vdunseb=%dvq6c(=f3%2sm4rr%a'
+SECRET_KEY = config('SECRET_KEY')
 
 SITE_ID = 3
 
@@ -24,22 +23,15 @@ INSTALLED_APPS = [
 
     'django_extensions',
 
-    'rest_framework',
-    # "debug_toolbar",
-    'django_filters',
-    'taggit',
-    'django_countries',
     'corsheaders',
     'ckeditor',
     'ckeditor_uploader',
     'django_quill',
-    # 'silk',
     'sorl.thumbnail',
     'constance',
     # To be able to use database for 'constance'
     'constance.backends.database',
     'watchman',
-    # "django_minify_html",
     
     # APPs in django
     'users',
@@ -61,22 +53,14 @@ INSTALLED_APPS = [
 
 
 MIDDLEWARE = [
-    # "debug_toolbar.middleware.DebugToolbarMiddleware",    # To enable 'django-debug-tool'
-    
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    # 'django.middleware.cache.UpdateCacheMiddleware',        # for per site cache
     'corsheaders.middleware.CorsMiddleware',                # To activate 'cors-headers'
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.cache.FetchFromCacheMiddleware',     # for per site cache
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    
-    # 'silk.middleware.SilkyMiddleware',				   # To enable django-silk
-    
+    'django.contrib.auth.middleware.AuthenticationMiddleware',    
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # "django_minify_html.middleware.MinifyHtmlMiddleware",   # To enable django_minify_html to load pages much faster
     'cart.custom_middleware.InitialSessionMiddleware',      # Customized middleware to check sessions
 ]
 
@@ -109,50 +93,15 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    #     'OPTIONS': {
-    #         'timeout': 20,
-    #                 }
-    # }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': config('MYSQL_DB'),
-    #     'USER': config('MYSQL_USER'),
-    #     'PASSWORD': config('MYSQL_PASSWORD'),
-    #     'HOST': 'localhost',
-    #     'PORT': '',
-    # }
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dornikas_db',
-        'USER': 'dornikas_admin',
-        'PASSWORD': 'dornikashop1379',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': config('MYSQL_DB'),
+        'USER': config('MYSQL_USER'),
+        'PASSWORD': config('MYSQL_PASSWORD'),
+        'HOST': config('MYSQL_HOST'),
+        'PORT': config('MYSQL_PORT'),
     }
 }
-
-
-# Using django memcache for caching
-"""
-CACHES = {
-    'default': {
-        'BACKEND': 'djpymemcache.backend.PyMemcacheCache',
-        'LOCATION': '127.0.0.1:11211',
-        'TIMEOUT': 600                                        # cache never expires
-    }
-}
-"""
-
-# for cache per site:
-
-# CACHE_MIDDLEWARE_ALIAS = 'apadana_cache'
-
-# CACHE_MIDDLEWARE_SECONDS = 900
-
-# CACHE_MIDDLEWARE_KEY_PREFIX = 'mem'
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -214,30 +163,6 @@ LOGIN_REDIRECT_URL = 'dashboard:profile'
 LOGIN_URL = 'login:login-signup'
 
 LOGOUT_REDIRECT_URL = 'vitrin:index'
-
-# We can also use 'reverse_lazy' to handle login and logout urls like above examples but we can
-# not to use 'reverse_lazy' (but it's recommended for good practice).
-
-
-TAGGIT_CASE_INSENSITIVE = True
-
-
-"""
-REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
-
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
-    ]
-}
-"""
 
 
 # Cors headers settings (NOTE: Without 'cors', process on diffrent domains and ports could not speak to each other! 'same-origin' only enabled when two process work on same domain and port)
@@ -311,35 +236,16 @@ CONSTANCE_IGNORE_ADMIN_VERSION_CHECK = True
 CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
 
 
-# django-debug-toolbar settings
-
-INTERNAL_IPS = [
-    # ...
-    "127.0.0.1",
-    # ...
-]
-
-
-# gmail config
-# EMAIL_HOST = config('EMAIL_HOST')
-# EMAIL_HOST_PORT = config('EMAIL_HOST_PORT')
-# EMAIL_USE_TLS = config('EMAIL_USE_TLS')
-# EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-
-
 # ! To authenticate email server, we either have to use ('EMAIL_PORT=587', 'EMAIL_USE_TLS=True') or ('EMAIL_PORT=465', 'EMAIL_USE_SSL=True'). We cannot use both
 # ? Both of SSL and TSL works, but it looks ('EMAIL_PORT=587', 'EMAIL_USE_TLS=True') is faster
-EMAIL_HOST = 'mail.dornika.shop'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-# EMAIL_PORT = 465
-# EMAIL_USE_SSL = True
-EMAIL_HOST_USER = 'dornika@dornika.shop'
-EMAIL_HOST_PASSWORD = 'dornikashop'
 
-# EMAIL_HOST_USER = 'dornikas@dornika.shop'
-# EMAIL_HOST_PASSWORD = 'dornikashop1379'
+# SMTP server connection
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
 
 
 
