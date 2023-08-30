@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}اجازه دسترسی ندارید{% endblock title %}
+
+
+{% block content %}
+<main class="mx-5 my-4" style="text-align: center; direction: rtl;">
+    <h1 class='mx-auto my-5'>اجاز دسترسی ندارد</h1>
+    <a href="{% url 'vitrin:index' %}" class='btn btn-primary mx-auto my-5 py-1 px-4' style="font-size: 18px; border-radius: 6px;">بازگشت به صفحه اصلی</a>
+</main>
+{% endblock content %}
