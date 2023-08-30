@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+<style>
+    main{
+        margin: 30px
+    }
+    main > div{
+        direction: rtl;
+        text-align: center;
+        margin: 10px auto;
+        max-width: 1200px;
+        width: 80%;
+        border: 4px solid #ff6720;
+        border-radius: 16px;
+        padding: 20px;
+        background-color: white;
+    }
+    h2{
+        font-size: 52px;
+    }
+    h5{
+        font-size: 26px;
+    }
+    button{
+        font-size: 18px;
+        border-radius: 6px;
+    }
+</style>
+{% endblock head %}
+
+
+{% block title %}صفحه مورد نظر وجود ندارد{% endblock title %}
+
+
+{% block content %}
+<main>
+    <div>
+        <h2 class="mt-2 mb-5">404</h2>
+        <h5 class="mt-2 mb-3">صفحه مورد نظر وجود ندارد</h5>
+        <button class="btn btn-primary px-4 py-1 mt-2 mb-4">بازگشت به صفحه اصلی</button>
+    </div>
+</main>
+{% endblock content %}
