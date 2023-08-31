@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Payment
 from . import pgi
 from order.models import Order
+from urllib.parse import unquote
 
 
 
@@ -94,6 +95,6 @@ def payment_failed(request, order_id:str, message:str):
     if not order_qs.exists():
         return redirect('vitrin:index')
     order = order_qs.get()
-    print(message)
-    context = {'order': order, 'message': message}
+    unquoted_message = unquote(message)
+    context = {'order': order, 'message': unquoted_message}
     return render(request, 'payment/payment-failed.html', context)
