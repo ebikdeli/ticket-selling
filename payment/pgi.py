@@ -36,7 +36,7 @@ def zarin_initialize_payment(request, order:object, payment:object) -> dict:
         data = {
             'merchant_id': settings.ZARIN_MERCHANT_ID,
             # 'amount': int(order.total_price) * 10,
-            'amount': 1000,
+            'amount': 10001,
             'description': f'پرداخت برای بلیط در ترندویل',
             'callback_url': callback_url,
             'metadata': {'email': request.user.email,
@@ -80,7 +80,7 @@ def zarin_payment_result_verify(request, order:object):
         data = {
             'merchant_id': settings.ZARIN_MERCHANT_ID,
             # 'amount': int(order.total_price) * 10,
-            'amount': 1000,
+            'amount': 10001,
             'authority': payment_authority
                 }
         headers = {'accept': 'application/json',

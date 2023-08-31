@@ -46,7 +46,7 @@
     <div class="order-items">
       <p>لیست بلیط های خریداری شده</p>
       <!-- (START) For loop for ticket name and ticket quantity -->
-      {% for ts in order.ticketsolds.all %}
+      {% for ts in order.ticketsold_order.all %}
       <div class="order-item">
         <h5>
           <span>{{ forloop.counter }}</span>
@@ -94,5 +94,5 @@
 
 
 {% block script %}
-<script src="{% static 'js/payment/payement-success.js' %}" type="module"></script>
+<script src="{% static 'js/payment/payment-success.js' %}" type="module"></script>
 {% endblock script %}

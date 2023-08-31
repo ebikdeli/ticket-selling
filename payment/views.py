@@ -58,7 +58,7 @@ def zarrinpal_result_redirect(request, order_id:str, payment_id:str):
     order.save()
     payment.is_paid = True
     payment.save()
-    return redirect('payment: payment_success', order_id=order_id)
+    return redirect('payment:payment-success', order_id=order_id)
 
 
 @login_required
