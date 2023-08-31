@@ -5,6 +5,8 @@ from django.dispatch import receiver
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.utils.text import slugify
+# ! Using allauth signals to syncronize session and user cart
+from allauth.account.signals import user_signed_up, user_logged_in
 
 import decimal
 import re
@@ -64,3 +66,19 @@ def create_cart_after_user_created(sender, instance, created, *args, **kwargs):
     """Create a cart for user after user created"""
     if created:
         instance.cart_user.create()
+
+
+
+
+# ! Django allauth signals recalled here
+
+@receiver(user_signed_up)
+def user_signed_up_(request, user, **kwargs):
+    """Overwrite allauth user_signed_up signal. Everytime user signup with social login this signal recalled"""
+
+
+@receiver(user_logged_in)
+def user_logged_in(request, user, **kwargs):
+    """Overwrite allauth user_logged_in signal. Everytime a user signin or even signup, this signal called. This is where we synchronize user session and its cart"""
+    cart = user.cart_user.first()
+    cart.sync_session_cart_after_authentication(request)
