@@ -94,5 +94,6 @@ def payment_failed(request, order_id:str, message:str):
     if not order_qs.exists():
         return redirect('vitrin:index')
     order = order_qs.get()
+    print(message)
     context = {'order': order, 'message': message}
     return render(request, 'payment/payment-failed.html', context)
