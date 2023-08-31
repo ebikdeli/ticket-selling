@@ -55,7 +55,7 @@ def zarin_initialize_payment(request, order:object, payment:object) -> dict:
                 zarrin_pgi_url = f'https://www.zarinpal.com/pg/StartPay/{authority}'
                 # Redirect user to PGI to pay
                 result = {'status': 'ok',
-                    'message': 'احراز هویت پذیرنده و اطلاعات پرداخت با موفقیت صورت پذیرفت. مشتری باید به درگاه پرداخت هدایت شود',
+                    'message': u'احراز هویت پذیرنده و اطلاعات پرداخت با موفقیت صورت پذیرفت. مشتری باید به درگاه پرداخت هدایت شود',
                     'data': zarrin_pgi_url}
                 return result
             # If there is a error:
@@ -64,10 +64,10 @@ def zarin_initialize_payment(request, order:object, payment:object) -> dict:
                 result = {'status': 'error', 'message': error, 'data': None}
                 return result
         else:
-            result = {'status': 'error', 'message': 'ارتباط با سایت پذیرنده ممکن نمی باشد', 'data': None}
+            result = {'status': 'error', 'message': u'ارتباط با سایت پذیرنده ممکن نمی باشد', 'data': None}
             return result
     except Exception as e:
-        data={'status': 'error', 'message': 'مشکلی در برنامه پیش آمده و پرداخت انجام نمی گیرد', 'data': None}
+        data={'status': 'error', 'message': u'مشکلی در برنامه پیش آمده و پرداخت انجام نمی گیرد', 'data': None}
         return data
 
 
@@ -88,13 +88,13 @@ def zarin_payment_result_verify(request, order:object):
         try:
             r = requests.post(url=url, data=json.dumps(data), headers=headers)
         except (requests.ConnectionError, requests.ReadTimeout, requests.RequestException):
-            data={'status': 'error', 'message': 'برقراری ارتباط با واسط پرداخت به مشکل برخورده', 'data': None}
+            data={'status': 'error', 'message': u'برقراری ارتباط با واسط پرداخت به مشکل برخورده', 'data': None}
             return data
         if r.status_code == 200 or 201:
             zarin_response = r.json()
             # If payment was a success execute following block
             if zarin_response['data'] and payment_status == 'OK':
-                result = {'status': 'ok', 'message': 'سفارش شما با موفقیت ثبت شد', 'data': 1}
+                result = {'status': 'ok', 'message': u'سفارش شما با موفقیت ثبت شد', 'data': 1}
                 return result
             # If there is an error in the payment execute following block
             else:
@@ -102,7 +102,7 @@ def zarin_payment_result_verify(request, order:object):
                 data={'status': 'error', 'message': error, 'data': None}
                 return data
     except Exception as e:
-        data={'status': 'error', 'message': 'مشکلی در برنامه پیش آمده و پرداخت انجام نمی گیرد', 'data': None}
+        data={'status': 'error', 'message': u'مشکلی در برنامه پیش آمده و پرداخت انجام نمی گیرد', 'data': None}
         return data
 
 
@@ -110,27 +110,27 @@ def _zarin_error_decode(zarin_response) -> str:
     """Helper function to decode error message in payment process. Return a string represents the error message"""
     code = zarin_response['errors']['code']
     if code == -9:
-        error = 'کد پذیرنده اشتباه یا مبلغ پرداختی کمتر از 1000 ریال است'
+        error = u'کد پذیرنده اشتباه یا مبلغ پرداختی کمتر از 1000 ریال است'
         # error = 'Less than 1000 Rials in your account'
     if code == -10:
-        error = 'آدرس آی پی یا مرچنت کد پذیرنده صحیح نیست'
+        error = u'آدرس آی پی یا مرچنت کد پذیرنده صحیح نیست'
         # error = 'IP address or Merchant code of Accepter is not valid'
     if code == -11:
-        error = 'کد پذیرنده فعال نیست'
+        error = u'کد پذیرنده فعال نیست'
     if code == -12:
-        error = 'تلاش بیش از اندازه در یک بازه زمانی کوتاه. بعدا تلاش کنید'
+        error = u'تلاش بیش از اندازه در یک بازه زمانی کوتاه. بعدا تلاش کنید'
         # error = 'Too many request in short time period. Try later'
     if code == -34:
-        error =  'مبلغ وارد شده از تراکنش بیشتر است'
+        error =  u'مبلغ وارد شده از تراکنش بیشتر است'
         # error = 'Input money is more than transaction'
     if code == -36:
-        error = 'موجودی باید بیش از 1000 ریال باشد'
+        error = u'موجودی باید بیش از 1000 ریال باشد'
     if code == -51:
-        error = 'انصراف از پرداخت'
+        error = u'انصراف از پرداخت'
         # error = 'پرداخت ناموفق. از پرداخت منصرف شده اید'
         # error = 'You Have cancelled the payment'
     if code == -53:
-        error = 'کد اتوریتی نامعتبر است'
+        error = u'کد اتوریتی نامعتبر است'
         # error = 'Authority code is invalid'
     # return {'code': code, 'error': error}
     return error

@@ -100,6 +100,9 @@ DATABASES = {
         'PASSWORD': config('MYSQL_PASSWORD'),
         'HOST': config('MYSQL_HOST'),
         'PORT': config('MYSQL_PORT'),
+        # 'OPTIONS': {
+        #     'charset': 'utf8mb4',
+        # },
     }
 }
 
