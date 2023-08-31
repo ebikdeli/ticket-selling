@@ -41,6 +41,8 @@ class Ticket(models.Model):
     
     def save(self, *args, **kwargs) -> None:
         self.slug = slugify(f'{self.name}_{self.ticket_number}')
+        if not self.ticket_number:
+            self.ticket_number = get_random_string(4)
         return super().save(*args, **kwargs)
 
 
