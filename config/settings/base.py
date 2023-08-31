@@ -276,3 +276,8 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+
+# ? Payment Gateway data
+
+ZARIN_MERCHANT_ID = config('ZARIN_MERCHANT_ID')

@@ -52,7 +52,7 @@
   <div class="order--body--box text-center">
       <h2 class="display-5 mb-4" style="color: rgb(237, 6, 6);">پرداخت انجام نگرفت</h2>
       <!-- * Following block will show user the problem with payment -->
-      <h3 class="py-4 h4 text-danger">مشکلی در پرداخت پیش آمده</h3>
+      <h3 class="py-4 h4 text-danger">{{ message }}</h3>
 
       <div class="mx-auto my-4 desktop tablet mobile">
           <img src="{% static 'image/failure.png' %}" id="failed-img" alt="failed-payment">

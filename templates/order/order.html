@@ -28,11 +28,11 @@
         <div class="d-flex justify-content-center flex-column">
 
             <!-- (START) For loop for ticket name and ticket quantity -->
-            {% for ts in order.ticketsolds.all %}
+            {% for ts in order.ticketsold_order.all %}
             <div class="order-item my-2 d-flex justify-content-between align-items-center">
                 <div>
                     <span>{{ forloop.counter }}.</span>&nbsp;
-                    <p>{{ ts.ticket.name }}</p>
+                    <p>{{ ts.ticket.name|truncatechars:45 }}</p>
                 </div>
                 <div>
                     <p class="order-item-quantity">{{ ts.quantity }}</p>
@@ -62,7 +62,7 @@
             </div>
         </div>
         {% comment %} ! PAYMENT LINK {% endcomment %}
-        <a href="#" style='text-decoration: none; '>
+        <a href="{% url 'payment:zarrinpal-request' order_id=order.order_id %}" style='text-decoration: none; '>
             <div class="payment-button-box">
                 <button class="btn btn-dark payment-button">
                     <span>پرداخت</span>

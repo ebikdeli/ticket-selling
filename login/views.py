@@ -16,6 +16,8 @@ import json
 
 def login_signup(request):
     """login and signup page form integrated into single page. All form validation happening in front-end"""
+    print(request.session.session_key)
+    print(request.session.items())
     return render(request, 'login/login-signup.html')
 
 

@@ -22,6 +22,7 @@ class Order(models.Model):
                                     related_name='order_ticket',
                                     blank=True,
                                     null=True)
+    authority = models.CharField(verbose_name=_('authority'), blank=True, max_length=50)
     discounts = models.DecimalField(verbose_name=_('discounts'), max_digits=10, decimal_places=0, default=0)
     is_paid = models.BooleanField(verbose_name=_('is_paid'), default=False)
     is_active = models.BooleanField(verbose_name=_('is_active'), default=True)

@@ -6,9 +6,8 @@ from . import views
 app_name = 'payment'
 
 urlpatterns = [
-    path('success/', views.payment_success, name='payment-success'),
-    path('failed/', views.payment_failed, name='payment-failed'),
-    path('pgi/<str:order_id>/', views.payment_request, name='payment-request'),
-    path('zarrin/<str:order_id>/', views.zarrin_pal_request, name='zarrin-pal'),
-    path('next-pay/<str:order_id>/', views.next_pay_request, name='next-pay'),
+    path('zarrinpal/<str:order_id>/', views.zarrinpal_request, name='zarrinpal-request'),
+    path('zarrinpal-result/<str:order_id>/<str:payment_id>/', views.zarrinpal_result_redirect, name='zarrinpal_result_redirect'),
+    path('success/<str:order_id>/<str:payement_id>/', views.payment_success, name='payment-success'),
+    path('failed/<str:order_id>/<str:message>/', views.payment_failed, name='payment-failed'),
 ]
