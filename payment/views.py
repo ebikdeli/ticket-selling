@@ -53,6 +53,7 @@ def zarrinpal_result_redirect(request, order_id:str, payment_id:str):
     # If payment was a success, change order and payment status to True and redirect them to payment_success
     order.is_paid = True
     order.is_active = False
+    order.authority = payment_authority
     order.save()
     payment.is_paid = True
     payment.save()
