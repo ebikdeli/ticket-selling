@@ -95,7 +95,7 @@ document.querySelector('#total-price').innerHTML = numberWithCommas(document.que
 // * Disable every card that is not active
 Array.from(document.querySelectorAll('.card-disabled')).forEach(belitCardButton => {
     belitCardButton.querySelector('.belit-card-add-cart-button').disabled = true;
-    belitCardButton.querySelector('.belit-card-add-cart-button').innerHTML = 'تمام شد';
+    belitCardButton.querySelector('.belit-card-add-cart-button').innerHTML = 'زمان قرعه کشی گذشته';
 })
 
 

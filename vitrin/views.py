@@ -5,7 +5,8 @@ from cart.models import Cart
 
 def index(request):
     """Index page of the shop"""
-    tickets = Ticket.objects.order_by('-updated')[:20]
+    tickets = Ticket.objects.order_by('-is_active', '-created')[:40]
+    print(tickets.values('id'))
     if request.user.is_authenticated:
         cart = request.user.cart_user.first()
     else:
