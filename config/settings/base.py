@@ -94,16 +94,24 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('MYSQL_DB'),
-        'USER': config('MYSQL_USER'),
-        'PASSWORD': config('MYSQL_PASSWORD'),
-        'HOST': config('MYSQL_HOST'),
-        'PORT': config('MYSQL_PORT'),
-        # 'OPTIONS': {
-        #     'charset': 'utf8mb4',
-        # },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'OPTIONS': {
+            'timeout': 20,
+                    }
     }
+    
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': config('MYSQL_DB'),
+    #     'USER': config('MYSQL_USER'),
+    #     'PASSWORD': config('MYSQL_PASSWORD'),
+    #     'HOST': config('MYSQL_HOST'),
+    #     'PORT': config('MYSQL_PORT'),
+    #     # 'OPTIONS': {
+    #     #     'charset': 'utf8mb4',
+    #     # },
+    # }
 }
 
 
